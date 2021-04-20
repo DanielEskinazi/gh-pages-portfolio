@@ -1,10 +1,10 @@
+import MaterialButton from './MaterialButton'
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Bare Bones.
-        </p>
+        <MaterialButton/>
       </header>
     </div>
   );
