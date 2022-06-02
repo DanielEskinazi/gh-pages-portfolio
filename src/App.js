@@ -1,10 +1,12 @@
+import  ContactForm  from './components/ContactForm'
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <p>
-          Bare Bones.
+          Under Construction...
         </p>
+        <ContactForm />
       </header>
     </div>
   );
