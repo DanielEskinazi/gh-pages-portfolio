@@ -1,11 +1,21 @@
+import Intro from "./components/Intro";
+import Header from "./components/Header";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 import ContactForm from "./components/ContactForm";
-import { style } from "./styles";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <h2 style={style.headline}>Under Construction...</h2>
+      <Intro />
+      <Header />
+      <About />
+      <Projects />
+      <Skills />
       <ContactForm />
+      <Footer />
     </div>
   );
 }

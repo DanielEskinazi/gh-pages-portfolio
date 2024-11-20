@@ -14,11 +14,24 @@ export default function ContactForm() {
         content="I will get back to you as soon as possible!"
       />
     );
+  } else if (state.errors?.length > 0) {
+    return (
+      <Message
+        error
+        header="Oops! Something went wrong. Please emaile me directly at contact@danieleskinazi.com"
+        content="Please try again later."
+      />
+    );
   }
+
   return (
     <form class="ui form" onSubmit={handleSubmit}>
       <div class="field">
         <label htmlFor="email">Email Address</label>
+        <div>
+          <input type="name" placeholder="jane Doe" id="name" name="name" />
+          <ValidationError prefix="Name" field="name" errors={state.errors} />
+        </div>
         <div>
           <input
             type="email"
