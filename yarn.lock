@@ -9423,6 +9423,15 @@ tsparticles-plugin-emitters@^2.12.0:
   dependencies:
     tsparticles-engine "^2.12.0"
 
+tsparticles-preset-links@^2.0.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/tsparticles-preset-links/-/tsparticles-preset-links-2.12.0.tgz#d91e663a0b189d29a86df5f7c99a65519064d1e5"
+  integrity sha512-ZWr4oDUVt+166lEmgjNCzysOXmyYAMH2ZD9dGIbqxamXK2TRt1/2JOj4edExiA3Qjml1zIu8TJ24yGRFF+FFMA==
+  dependencies:
+    tsparticles-basic "^2.12.0"
+    tsparticles-engine "^2.12.0"
+    tsparticles-interaction-particles-links "^2.12.0"
+
 tsparticles-shape-circle@^2.12.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/tsparticles-shape-circle/-/tsparticles-shape-circle-2.12.0.tgz#52757d222145c3f80b02d3c51e6158aee0af024c"
