@@ -1,15 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Intro.css"; // Import CSS for styling
+import Particles from "react-tsparticles"; // Import Particles from react-tsparticles
+import { loadFull } from "tsparticles"; // Import loadFull from tsparticles
+import { loadLinksPreset } from "tsparticles-preset-links"; // Import Links preset
 
 const Intro = () => {
+  const [showParticles, setShowParticles] = useState(true);
+  const [fixedHeader, setFixedHeader] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight) {
-        document.body.classList.remove("hide-footer", "hide-header");
-        document.body.classList.add("show-footer", "show-header");
+      if (window.scrollY > 0) {
+        setShowParticles(false);
       } else {
-        document.body.classList.add("hide-footer", "hide-header");
-        document.body.classList.remove("show-footer", "show-header");
+        setShowParticles(true);
+      }
+
+      if (window.scrollY > window.innerHeight) {
+        setFixedHeader(true);
+      } else {
+        setFixedHeader(false);
       }
     };
 
@@ -21,18 +31,41 @@ const Intro = () => {
     };
   }, []);
 
+  const particlesInit = async (main) => {
+    await loadFull(main);
+    await loadLinksPreset(main);
+  };
+
   return (
-    <section id="intro" className="full-page">
-      <div className="centered-content">
-        <h2>About Me</h2>
-        <p className="text">
-          Hello, I'm Daniel Eskinazi. I'm a full-stack developer.
-        </p>
-        <a href="#about" className="button smooth-scroll">
-          Learn More
-        </a>
-      </div>
-    </section>
+    <>
+      <section id="intro" className="full-page">
+        {showParticles && (
+          <Particles
+            id="tsparticles"
+            init={particlesInit}
+            options={{
+              preset: "links",
+              background: {
+                color: {
+                  value: "#252a34", // Update background color
+                },
+              },
+            }}
+            className="particles"
+          />
+        )}
+        <div className="centered-content">
+          <p className="text">
+            Hello, I'm <span id="my-name">Daniel Eskinazi.</span>
+            <br />
+            I'm a full-stack developer.
+          </p>
+          <a href="#about" className="button smooth-scroll">
+            Learn More
+          </a>
+        </div>
+      </section>
+    </>
   );
 };
 

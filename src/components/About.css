@@ -1,3 +1,7 @@
 .below-header {
-  padding-top: 60px; /* Adjust according to header height */
+  padding-top: 80px; /* Adjust according to header height */
+}
+
+.spacer {
+  height: 80px; /* Adjust according to header height */
 }
