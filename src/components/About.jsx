@@ -2,7 +2,8 @@ import React from "react";
 import "./About.css"; // Import CSS for styling
 
 const About = () => (
-  <section id="about" className="below-header">
+  <section id="about">
+    <div className="spacer"></div> {/* Add spacer element */}
     <h2>About Me</h2>
     <p>
       I have a diverse educational background with three bachelor's degrees. I

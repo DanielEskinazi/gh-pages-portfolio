@@ -5,22 +5,34 @@ body {
 }
 
 .full-page {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
+  overflow: hidden;
+  background-color: #252a34; /* Update background color */
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100vh; /* Limit to window height */
+  z-index: 0;
 }
 
 .centered-content {
+  position: relative;
   max-width: 600px;
+  z-index: 1;
 }
 
 .button {
   background-color: transparent;
-  color: black;
+  color: white; /* Update text color */
   padding: 10px 20px;
-  border: 5px solid #007bff;
+  border: 2px solid white;
   border-radius: 5px;
   text-decoration: none;
   font-size: 16px;
@@ -33,8 +45,15 @@ body {
 }
 
 .text {
-  font-size: 24px;
+  font-size: 32px;
   font-family: "Raleway";
+  color: white; /* Update text color */
+}
+
+#my-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #007bff;
 }
 
 html {
@@ -45,30 +64,27 @@ html {
   display: none;
 }
 
-.hide-header header {
-  display: none;
-}
-
 .show-footer footer {
   display: block;
   transform: translateY(100%);
   animation: slideUp 1s forwards;
 }
 
-.show-header header {
-  display: block;
-  transform: translateY(-100%);
-  animation: slideDown 1s forwards;
-  position: fixed;
+header {
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
+  background-color: #252a34; /* Ensure header background matches page background */
+  padding: 20px 0; /* Adjust padding to ensure full visibility */
+}
+
+.fixed-header {
+  position: fixed;
 }
 
 header,
 footer {
-  position: relative;
   z-index: 1000;
 }
 
