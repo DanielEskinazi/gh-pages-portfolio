@@ -6,20 +6,13 @@ import { loadLinksPreset } from "tsparticles-preset-links"; // Import Links pres
 
 const Intro = () => {
   const [showParticles, setShowParticles] = useState(true);
-  const [fixedHeader, setFixedHeader] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > window.innerHeight / 3) {
         setShowParticles(false);
       } else {
         setShowParticles(true);
-      }
-
-      if (window.scrollY > window.innerHeight) {
-        setFixedHeader(true);
-      } else {
-        setFixedHeader(false);
       }
     };
 
