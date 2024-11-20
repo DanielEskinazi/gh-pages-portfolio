@@ -1,0 +1,22 @@
+header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #252a34; /* Ensure header background matches page background */
+  padding: 20px 0; /* Adjust padding to ensure full visibility */
+}
+
+.fixed-header {
+  position: fixed;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
