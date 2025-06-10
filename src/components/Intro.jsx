@@ -6,7 +6,7 @@ import { loadLinksPreset } from "tsparticles-preset-links"; // Import Links pres
 import { tsParticles } from "tsparticles-engine"; // Import tsParticles engine
 
 const Intro = () => {
-  const [commitCount, setCommitCount] = useState(19); // Default fallback
+  const [commitCount, setCommitCount] = useState(0); // Start with 0 particles
   const [commits, setCommits] = useState([]); // Store commit data for linking
   const [particlesReady, setParticlesReady] = useState(false); // Track when particles are loaded
 
@@ -34,56 +34,75 @@ const Intro = () => {
         }
         
         const repos = await reposResponse.json();
-        let allCommits = [];
         
-        // Fetch ALL commits from ALL repositories
-        for (const repo of repos) { // Keep all repos
+        // Fetch ALL commits from ALL repositories in parallel
+        const commitPromises = repos.map(async (repo) => {
+          const repoCommits = [];
           try {
-            let page = 1;
-            let hasMoreCommits = true;
+            // Fetch first page to check if there are commits
+            const firstPageResponse = await fetch(
+              `https://api.github.com/repos/DanielEskinazi/${repo.name}/commits?per_page=100&page=1`,
+              { headers }
+            );
             
-            while (hasMoreCommits) {
-              const commitsResponse = await fetch(
-                `https://api.github.com/repos/DanielEskinazi/${repo.name}/commits?per_page=100&page=${page}`, // 100 commits per page
-                { headers }
-              );
+            if (firstPageResponse.ok) {
+              const firstPageCommits = await firstPageResponse.json();
               
-              if (commitsResponse.ok) {
-                const repoCommits = await commitsResponse.json();
+              if (firstPageCommits.length > 0) {
+                // Add first page commits
+                repoCommits.push(...firstPageCommits.map(commit => ({
+                  ...commit,
+                  repoName: repo.name,
+                  url: commit.html_url
+                })));
                 
-                if (repoCommits.length === 0) {
-                  hasMoreCommits = false;
-                } else {
-                  const commitsWithRepo = repoCommits.map(commit => ({
-                    ...commit,
-                    repoName: repo.name,
-                    url: commit.html_url
-                  }));
-                  allCommits = [...allCommits, ...commitsWithRepo];
-                  page++;
-                  
-                  // If we got less than 100, we're on the last page
-                  if (repoCommits.length < 100) {
-                    hasMoreCommits = false;
+                // If we got 100 commits, there might be more pages
+                if (firstPageCommits.length === 100) {
+                  // Fetch remaining pages in parallel (up to 5 pages per repo)
+                  const pagePromises = [];
+                  for (let page = 2; page <= 5; page++) {
+                    pagePromises.push(
+                      fetch(`https://api.github.com/repos/DanielEskinazi/${repo.name}/commits?per_page=100&page=${page}`, { headers })
+                        .then(res => res.ok ? res.json() : [])
+                        .then(commits => commits.map(commit => ({
+                          ...commit,
+                          repoName: repo.name,
+                          url: commit.html_url
+                        })))
+                    );
                   }
+                  
+                  const additionalPages = await Promise.all(pagePromises);
+                  additionalPages.forEach(pageCommits => {
+                    if (pageCommits.length > 0) {
+                      repoCommits.push(...pageCommits);
+                    }
+                  });
                 }
-              } else {
-                console.log(`Failed to fetch commits for ${repo.name}, page ${page}`);
-                hasMoreCommits = false;
               }
             }
             
-            console.log(`Fetched ${allCommits.filter(c => c.repoName === repo.name).length} commits from ${repo.name}`);
-          } catch (repoError) {
-            console.log(`Error fetching commits for ${repo.name}:`, repoError);
+            console.log(`Fetched ${repoCommits.length} commits from ${repo.name}`);
+            return repoCommits;
+          } catch (error) {
+            console.log(`Error fetching commits for ${repo.name}:`, error);
+            return [];
           }
-        }
+        });
+        
+        // Wait for all repos to finish
+        const allRepoCommits = await Promise.all(commitPromises);
+        const allCommits = allRepoCommits.flat();
         
         if (allCommits.length > 0) {
           // Shuffle commits for random particle-to-commit mapping
           const shuffledCommits = allCommits.sort(() => Math.random() - 0.5);
           setCommits(shuffledCommits);
-          setCommitCount(Math.min(allCommits.length, 500)); // Cap at 500 particles for performance
+          
+          // Set all particles at once, they'll fade in via CSS
+          const targetCount = Math.min(allCommits.length, 500); // Cap at 500 particles
+          setCommitCount(targetCount);
+          
           console.log(`Fetched ${allCommits.length} real commits from GitHub!`);
         } else {
           throw new Error('No commits found');
@@ -106,6 +125,8 @@ const Intro = () => {
         }
         
         setCommits(expandedCommits);
+        
+        // Set fallback particles
         setCommitCount(30);
       }
     };
