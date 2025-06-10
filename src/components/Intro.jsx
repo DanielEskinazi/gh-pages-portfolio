@@ -9,7 +9,6 @@ const Intro = () => {
   const [commitCount, setCommitCount] = useState(0); // Start with 0 particles
   const [commits, setCommits] = useState([]); // Store commit data for linking
   const [particlesReady, setParticlesReady] = useState(false); // Track when particles are loaded
-  const [showTooltip, setShowTooltip] = useState(false); // Control tooltip visibility
 
   // Detect if user is on mobile device
   const isMobile = () => {
@@ -120,17 +119,26 @@ const Intro = () => {
         const allCommits = allRepoCommits.flat();
 
         if (allCommits.length > 0) {
-          // Shuffle commits for random particle-to-commit mapping
-          const shuffledCommits = allCommits.sort(() => Math.random() - 0.5);
+          // Sort commits by date (most recent first) and take only the last 50
+          const sortedCommits = allCommits.sort(
+            (a, b) =>
+              new Date(b.commit.author.date) - new Date(a.commit.author.date)
+          );
+          const last50Commits = sortedCommits.slice(0, 50);
+
+          // Shuffle the last 50 commits for random particle-to-commit mapping
+          const shuffledCommits = last50Commits.sort(() => Math.random() - 0.5);
           setCommits(shuffledCommits);
 
-          // Set all particles at once, they'll fade in via CSS
-          // Use much fewer particles on mobile for better performance
-          const maxParticles = isMobile() ? 50 : 500;
-          const targetCount = Math.min(allCommits.length, maxParticles);
+          // Set particles to exactly 50 (or fewer on mobile for performance)
+          const targetCount = isMobile()
+            ? Math.min(last50Commits.length, 25)
+            : last50Commits.length;
           setCommitCount(targetCount);
 
-          console.log(`Fetched ${allCommits.length} real commits from GitHub!`);
+          console.log(
+            `Using last ${last50Commits.length} commits from GitHub!`
+          );
         } else {
           throw new Error("No commits found");
         }
@@ -175,22 +183,6 @@ const Intro = () => {
 
     fetchRealCommits();
   }, []);
-
-  // Show tooltip when particles are ready, then hide after 5 seconds
-  useEffect(() => {
-    if (particlesReady) {
-      const timer = setTimeout(() => {
-        setShowTooltip(true);
-        // Hide tooltip after 5 seconds
-        const hideTimer = setTimeout(() => {
-          setShowTooltip(false);
-        }, 5000);
-        return () => clearTimeout(hideTimer);
-      }, 1000); // Show after 1 second delay
-
-      return () => clearTimeout(timer);
-    }
-  }, [particlesReady]);
 
   const particlesInit = async (main) => {
     await loadFull(main);
@@ -292,7 +284,7 @@ const Intro = () => {
                       opacity: 1,
                       speed: 3,
                       color: {
-                        value: "#65c7f7",
+                        value: "#4ade80",
                       },
                     },
                   },
@@ -308,29 +300,25 @@ const Intro = () => {
           }`}
         >
           <div className="content-blocker">
-            <p className="text intro-text">
-              Hello, I'm <span id="my-name">Daniel Eskinazi</span>
-              <br />
-              I'm a full-stack software developer
-              <br />
-              <span style={{ fontSize: "32px", opacity: 0.9 }}>
-                I turn your ideas into{" "}
-                <span className="gradient-text">software</span>
-              </span>
-            </p>
-            <a
-              href="#about"
-              className="button smooth-scroll intro-button"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Learn More
-            </a>
+            <div className="intro-content">
+              <h1 className="intro-title">
+                <span className="frontend-text">FULL STACK</span>
+                <span className="developer-text">DEVELOPER</span>
+              </h1>
+              <p className="intro-description">
+                Hi! I'm <span className="name-highlight">Daniel</span>. A Senior
+                Full Stack Engineer with 7+ years of experience building
+                high-performance, scalable, and responsive web solutions.
+              </p>
+              <a
+                href="#about"
+                className="hire-button smooth-scroll intro-button"
+                onClick={(e) => e.stopPropagation()}
+              >
+                HIRE ME
+              </a>
+            </div>
           </div>
-        </div>
-
-        {/* Tooltip to indicate particles are clickable */}
-        <div className={`particle-tooltip ${showTooltip ? "visible" : ""}`}>
-          Each particle is one of my own github commit. Click any to explore!
         </div>
       </section>
     </>
