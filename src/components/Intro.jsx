@@ -12,10 +12,8 @@ const Intro = () => {
   useEffect(() => {
     const fetchRealCommits = async () => {
       try {
-        // You'll need to add your GitHub token here for authentication
-        // Create a token at: https://github.com/settings/tokens
-        // For a public portfolio, you can use a token with just public repo access
-        const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN || '';
+        // Use token in development, but not in production build to avoid exposure
+        const GITHUB_TOKEN = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_GITHUB_TOKEN : '';
         
         const headers = GITHUB_TOKEN ? {
           'Authorization': `token ${GITHUB_TOKEN}`,
@@ -38,7 +36,7 @@ const Intro = () => {
         let allCommits = [];
         
         // Fetch ALL commits from ALL repositories
-        for (const repo of repos) { // No limit on repos
+        for (const repo of repos) { // Keep all repos
           try {
             let page = 1;
             let hasMoreCommits = true;
