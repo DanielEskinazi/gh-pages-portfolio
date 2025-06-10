@@ -1,23 +1,16 @@
 import React from "react";
+import ContactForm from "./ContactForm";
 
 const Contact = () => (
-  <section id="contact">
-    <h2>Contact</h2>
-    <form>
-      <label>
-        Name:
-        <input type="text" name="name" />
-      </label>
-      <label>
-        Email:
-        <input type="email" name="email" />
-      </label>
-      <label>
-        Message:
-        <textarea name="message"></textarea>
-      </label>
-      <button type="submit">Send</button>
-    </form>
+  <section id="contact" className="contact">
+    <div className="contact-container">
+      <h2 className="contact-title">Get In Touch</h2>
+      <p className="contact-description">
+        I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.
+        Feel free to reach out!
+      </p>
+      <ContactForm />
+    </div>
   </section>
 );
 

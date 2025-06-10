@@ -1,0 +1,292 @@
+/* Header Component */
+header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #252a34;
+  padding: 20px 0;
+}
+
+.fixed-header {
+  position: fixed;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Intro Component */
+.full-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+  background-color: #252a34;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+.centered-content {
+  position: relative;
+  max-width: 600px;
+  z-index: 1;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.text {
+  font-size: 32px;
+  font-family: "Raleway";
+  color: white;
+}
+
+#my-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* About Component */
+.below-header {
+  padding-top: 80px;
+}
+
+.spacer {
+  height: 80px;
+}
+
+/* Contact Component */
+.contact {
+  padding: 4rem 1rem;
+  background-color: #f5f5f5;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.contact-description {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+/* Skills Component */
+.skills {
+  padding: 4rem 1rem;
+  background-color: #fff;
+}
+
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.skills-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.skill-category {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.category-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.skill-tag {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Projects Component */
+.projects {
+  padding: 4rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.projects-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.project-description {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.project-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.tag-react {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.tag-node {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.tag-mongo {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.tag-next {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.tag-openai {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.tag-css {
+  background-color: #fce4ec;
+  color: #c2185b;
+}
+
+/* Footer Animations */
+.hide-footer footer {
+  display: none;
+}
+
+.show-footer footer {
+  display: block;
+  transform: translateY(100%);
+  animation: slideUp 1s forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  to {
+    transform: translateY(0);
+  }
+}

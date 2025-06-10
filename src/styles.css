@@ -28,7 +28,14 @@ footer {
   color: #fff;
   text-align: center;
   padding: 1rem;
-  position: fixed;
   width: 100%;
-  bottom: 0;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }

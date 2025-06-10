@@ -2,52 +2,93 @@
 import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { Message } from "semantic-ui-react";
-import { style } from "../styles";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("mbjwwvdd");
+
   if (state.succeeded) {
     return (
       <Message
         success
-        header="Thank you for contacting me."
-        content="I will get back to you as soon as possible!"
+        icon="check circle"
+        header="Thank you for contacting me!"
+        content="I will get back to you as soon as possible."
+        style={{ maxWidth: "600px", margin: "0 auto" }}
       />
     );
   } else if (state.errors?.length > 0) {
     return (
       <Message
         error
-        header="Oops! Something went wrong. Please emaile me directly at contact@danieleskinazi.com"
-        content="Please try again later."
+        icon="exclamation triangle"
+        header="Oops! Something went wrong."
+        content="Please email me directly at contact@danieleskinazi.com"
+        style={{ maxWidth: "600px", margin: "0 auto" }}
       />
     );
   }
 
   return (
-    <form class="ui form" onSubmit={handleSubmit}>
-      <div class="field">
-        <label htmlFor="email">Email Address</label>
-        <div>
-          <input type="name" placeholder="jane Doe" id="name" name="name" />
+    <form
+      className="ui form segment"
+      onSubmit={handleSubmit}
+      style={{ maxWidth: "600px", margin: "0 auto" }}
+    >
+      <div className="two fields">
+        <div className="field">
+          <label htmlFor="name">
+            <i className="user icon"></i>Full Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Jane Doe"
+            required
+          />
           <ValidationError prefix="Name" field="name" errors={state.errors} />
         </div>
-        <div>
+
+        <div className="field">
+          <label htmlFor="email">
+            <i className="envelope icon"></i>Email Address
+          </label>
           <input
             type="email"
-            placeholder="janeDoe@gmail.com"
             id="email"
             name="email"
+            placeholder="jane.doe@example.com"
+            required
           />
           <ValidationError prefix="Email" field="email" errors={state.errors} />
         </div>
       </div>
-      <div class="field" style={style.marginTop}>
-        <label htmlFor="message">Please leave your message here...</label>
-        <textarea id="message" name="message" rows="3" />
+
+      <div className="field">
+        <label htmlFor="message">
+          <i className="comment alternate icon"></i>Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="How can I help you?"
+          required
+        />
+        <ValidationError
+          prefix="Message"
+          field="message"
+          errors={state.errors}
+        />
       </div>
-      <button class="ui button" type="submit" disabled={state.submitting}>
-        Confirm
+
+      <button
+        className="ui primary labeled icon button"
+        type="submit"
+        disabled={state.submitting}
+      >
+        <i className="paper plane icon"></i>
+        Send Message
       </button>
     </form>
   );
