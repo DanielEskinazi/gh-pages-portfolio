@@ -8,6 +8,7 @@ import { tsParticles } from "tsparticles-engine"; // Import tsParticles engine
 const Intro = () => {
   const [commitCount, setCommitCount] = useState(19); // Default fallback
   const [commits, setCommits] = useState([]); // Store commit data for linking
+  const [particlesReady, setParticlesReady] = useState(false); // Track when particles are loaded
 
   useEffect(() => {
     const fetchRealCommits = async () => {
@@ -119,9 +120,24 @@ const Intro = () => {
 
   const particlesLoaded = (container) => {
     console.log('Particles loaded, setting up click handler');
+    setParticlesReady(true); // Mark particles as ready
     
     // Use the global tsParticles click handler
     tsParticles.setOnClickHandler((event, particlesInstance) => {
+      // Check if the click is within the intro section
+      const introSection = document.getElementById('intro');
+      if (!introSection || !introSection.contains(event.target)) {
+        return; // Ignore clicks outside intro section
+      }
+      
+      // Check if we clicked on a UI element (not particles)
+      const clickedElement = event.target;
+      if (clickedElement.classList.contains('button') || 
+          clickedElement.classList.contains('text') ||
+          clickedElement.closest('.content-blocker')) {
+        return; // Don't handle clicks on UI elements
+      }
+      
       console.log('tsParticles click handler triggered!', event, particlesInstance);
       
       if (commits.length > 0) {
@@ -135,16 +151,22 @@ const Intro = () => {
   return (
     <>
       <section id="intro" className="full-page">
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          loaded={particlesLoaded}
-          style={{ cursor: 'pointer' }}
-          options={{
+        <div className="particles-container">
+          <div className={`particles-wrapper ${particlesReady ? 'particles-visible' : ''}`}>
+            <Particles
+            id="tsparticles"
+            init={particlesInit}
+            loaded={particlesLoaded}
+            style={{ cursor: 'pointer' }}
+            options={{
             preset: "links",
+            fullScreen: {
+              enable: false,
+              zIndex: -1
+            },
             background: {
               color: {
-                value: "#252a34", // Update background color
+                value: "transparent", // Make background transparent
               },
             },
             particles: {
@@ -178,15 +200,23 @@ const Intro = () => {
           }}
           className="particles-box"
         />
-        <div className="centered-content">
-          <p className="text">
-            Hello, I'm <span id="my-name">Daniel Eskinazi.</span>
-            <br />
-            I'm a full-stack developer.
-          </p>
-          <a href="#about" className="button smooth-scroll">
-            Learn More
-          </a>
+          </div>
+        </div>
+        <div className={`centered-content ${particlesReady ? 'particles-loaded' : ''}`}>
+          <div className="content-blocker">
+            <p className="text intro-text">
+              Hello, I'm <span id="my-name">Daniel Eskinazi.</span>
+              <br />
+              I'm a full-stack developer.
+            </p>
+            <a 
+              href="#about" 
+              className="button smooth-scroll intro-button"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Learn More
+            </a>
+          </div>
         </div>
       </section>
     </>
