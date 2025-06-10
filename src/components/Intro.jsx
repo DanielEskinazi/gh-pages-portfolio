@@ -9,6 +9,17 @@ const Intro = () => {
   const [commitCount, setCommitCount] = useState(0); // Start with 0 particles
   const [commits, setCommits] = useState([]); // Store commit data for linking
   const [particlesReady, setParticlesReady] = useState(false); // Track when particles are loaded
+  const [showTooltip, setShowTooltip] = useState(false); // Control tooltip visibility
+
+  // Detect if user is on mobile device
+  const isMobile = () => {
+    return (
+      window.innerWidth <= 768 ||
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    );
+  };
 
   useEffect(() => {
     const fetchRealCommits = async () => {
@@ -114,7 +125,9 @@ const Intro = () => {
           setCommits(shuffledCommits);
 
           // Set all particles at once, they'll fade in via CSS
-          const targetCount = Math.min(allCommits.length, 500); // Cap at 500 particles
+          // Use much fewer particles on mobile for better performance
+          const maxParticles = isMobile() ? 50 : 500;
+          const targetCount = Math.min(allCommits.length, maxParticles);
           setCommitCount(targetCount);
 
           console.log(`Fetched ${allCommits.length} real commits from GitHub!`);
@@ -147,20 +160,37 @@ const Intro = () => {
           },
         ];
 
+        const fallbackCount = isMobile() ? 15 : 30;
         const expandedCommits = [];
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < fallbackCount; i++) {
           expandedCommits.push(fallbackCommits[i % fallbackCommits.length]);
         }
 
         setCommits(expandedCommits);
 
         // Set fallback particles
-        setCommitCount(30);
+        setCommitCount(fallbackCount);
       }
     };
 
     fetchRealCommits();
   }, []);
+
+  // Show tooltip when particles are ready, then hide after 5 seconds
+  useEffect(() => {
+    if (particlesReady) {
+      const timer = setTimeout(() => {
+        setShowTooltip(true);
+        // Hide tooltip after 5 seconds
+        const hideTimer = setTimeout(() => {
+          setShowTooltip(false);
+        }, 5000);
+        return () => clearTimeout(hideTimer);
+      }, 1000); // Show after 1 second delay
+
+      return () => clearTimeout(timer);
+    }
+  }, [particlesReady]);
 
   const particlesInit = async (main) => {
     await loadFull(main);
@@ -256,13 +286,13 @@ const Intro = () => {
                       },
                     },
                     bubble: {
-                      distance: 35,
+                      distance: 20,
                       size: 8,
                       duration: 0.3,
                       opacity: 1,
                       speed: 3,
                       color: {
-                        value: "#007bff",
+                        value: "#65c7f7",
                       },
                     },
                   },
@@ -279,9 +309,14 @@ const Intro = () => {
         >
           <div className="content-blocker">
             <p className="text intro-text">
-              Hello, I'm <span id="my-name">Daniel Eskinazi.</span>
+              Hello, I'm <span id="my-name">Daniel Eskinazi</span>
               <br />
-              I'm a full-stack developer.
+              I'm a full-stack software developer
+              <br />
+              <span style={{ fontSize: "32px", opacity: 0.9 }}>
+                I turn your ideas into{" "}
+                <span className="gradient-text">software</span>
+              </span>
             </p>
             <a
               href="#about"
@@ -291,6 +326,11 @@ const Intro = () => {
               Learn More
             </a>
           </div>
+        </div>
+
+        {/* Tooltip to indicate particles are clickable */}
+        <div className={`particle-tooltip ${showTooltip ? "visible" : ""}`}>
+          Each particle is one of my own github commit. Click any to explore!
         </div>
       </section>
     </>
