@@ -4,25 +4,43 @@ import { motion } from "framer-motion";
 const Skills = () => {
   const skillCategories = [
     {
+      title: "Languages",
+      skills: ["Go", "Python", "TypeScript", "JavaScript"],
+    },
+    {
       title: "Frontend",
-      skills: ["React", "JavaScript", "TypeScript", "HTML5", "CSS3", "Responsive Design"]
+      skills: ["React", "Next.js", "Responsive Design"],
     },
     {
-      title: "Backend", 
-      skills: ["Node.js", "Python", "Java", "C++", "REST APIs", "Microservices"]
+      title: "Backend",
+      skills: [
+        "REST APIs",
+        "GraphQL",
+        "Microservices",
+        "WebSockets",
+        "gRPC",
+        "Event-Driven Architecture",
+      ],
     },
     {
-      title: "Databases",
-      skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Database Design"]
+      title: "Databases & Storage",
+      skills: ["PostgreSQL", "Couchbase", "Redis", "S3"],
     },
     {
       title: "Cloud & DevOps",
-      skills: ["AWS", "Azure", "Docker", "Jenkins", "CI/CD", "Git"]
+      skills: ["Docker", "CI/CD", "GitHub Actions", "AWS"],
     },
     {
-      title: "Frameworks & Tools",
-      skills: ["Express.js", "Spring Boot", "Next.js", "VS Code", "Agile", "Scrum"]
-    }
+      title: "Tools & Practices",
+      skills: [
+        "Git",
+        "VS Code",
+        "Agile",
+        "Test-Driven Development",
+        "API Design",
+        "System Design",
+      ],
+    },
   ];
 
   return (
@@ -35,7 +53,7 @@ const Skills = () => {
         >
           Technical Skills
         </motion.h2>
-        
+
         <div className="skills-grid">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -52,7 +70,9 @@ const Skills = () => {
                     key={skill}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
+                    transition={{
+                      delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                    }}
                     className="skill-tag"
                   >
                     {skill}
