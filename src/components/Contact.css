@@ -1,0 +1,180 @@
+/* Modern Contact Section Styles */
+.modern-contact-section {
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header Section */
+.contact-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.asterisk {
+  font-size: 2rem;
+  color: #8e2de2;
+  font-weight: bold;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.contact-description {
+  font-size: 1.2rem;
+  color: #cccccc;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modern-contact-section {
+    padding: 60px 0;
+  }
+
+  .contact-container {
+    padding: 0 1.5rem;
+  }
+
+  .contact-header {
+    margin-bottom: 3rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .asterisk {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+  }
+
+  .contact-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-contact-section {
+    padding: 40px 0;
+  }
+
+  .contact-container {
+    padding: 0 1rem;
+  }
+
+  .contact-header {
+    margin-bottom: 2rem;
+  }
+
+  .asterisk {
+    font-size: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .contact-description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Remove old styles conflicts */
+.modern-contact-section .contact-title,
+.modern-contact-section .contact {
+  display: none;
+}
+
+/* Ensure particles show through */
+.modern-contact-section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Animation for content reveal */
+.contact-header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .contact-header {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .section-title {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  .contact-description {
+    color: #ffffff;
+  }
+
+  .asterisk {
+    color: #ffffff;
+  }
+}

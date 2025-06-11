@@ -1,8 +1,7 @@
 import Intro from "./components/Intro";
 import Header from "./components/Header";
-import About from "./components/About";
-import Projects from "./components/Projects";
 import Skills from "./components/Skills";
+import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -11,9 +10,8 @@ function App() {
     <div className="App">
       <Intro />
       <Header />
-      <About />
-      <Projects />
       <Skills />
+      <Projects />
       <Contact />
       <Footer />
     </div>

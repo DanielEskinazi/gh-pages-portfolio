@@ -300,23 +300,59 @@ const Intro = () => {
           }`}
         >
           <div className="content-blocker">
-            <div className="intro-content">
-              <h1 className="intro-title">
-                <span className="frontend-text">FULL STACK</span>
-                <span className="developer-text">DEVELOPER</span>
-              </h1>
-              <p className="intro-description">
-                Hi! I'm <span className="name-highlight">Daniel</span>. A Senior
-                Full Stack Engineer with 7+ years of experience building
-                high-performance, scalable, and responsive web solutions.
-              </p>
-              <a
-                href="#about"
-                className="learn-more-button smooth-scroll intro-button"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Learn More
-              </a>
+            <div className="intro-layout">
+              {/* Left side - Text content */}
+              <div className="intro-content">
+                <h1 className="intro-title">
+                  <span className="frontend-text">FULL STACK</span>
+                  <span className="developer-text">DEVELOPER</span>
+                </h1>
+                <p className="intro-description">
+                  Hi! I'm <span className="name-highlight">Daniel</span>. A
+                  Senior Full Stack Engineer with 7+ years of experience
+                  building high-performance, scalable, and responsive web
+                  solutions.
+                </p>
+                <a
+                  href="#skills"
+                  className="learn-more-button smooth-scroll intro-button"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  View My Tech Stack
+                </a>
+              </div>
+
+              {/* Right side - Profile card */}
+              <div className="profile-card">
+                <div className="profile-image">
+                  <img src="/headshot.jpg" alt="Daniel Eskinazi" />
+                </div>
+                <h3 className="profile-name">Daniel Eskinazi</h3>
+                <p className="profile-title">Full Stack Developer</p>
+                <p className="profile-location">Plantation, Florida</p>
+
+                <div className="social-links">
+                  <a href="#" className="social-link">
+                    <i className="fab fa-dribbble"></i>
+                  </a>
+                  <a href="#" className="social-link">
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                  <a href="#" className="social-link">
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" className="social-link">
+                    <i className="fas fa-envelope"></i>
+                  </a>
+                </div>
+
+                <button
+                  className="contact-button"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Let's Talk
+                </button>
+              </div>
             </div>
           </div>
         </div>

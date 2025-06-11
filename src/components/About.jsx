@@ -12,7 +12,7 @@ const About = () => (
         </div>
         <h3 className="profile-name">Daniel Eskinazi</h3>
         <p className="profile-title">Full Stack Developer</p>
-        <p className="profile-location">Miami, Florida</p>
+        <p className="profile-location">Plantation, Florida</p>
 
         <div className="social-links">
           <a href="#" className="social-link">

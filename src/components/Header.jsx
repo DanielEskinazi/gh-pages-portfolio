@@ -6,7 +6,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["intro", "about", "projects", "skills", "contact"];
+      const sections = ["intro", "skills", "projects", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -32,30 +32,23 @@ const Header = () => {
         <a 
           href="#intro" 
           className={`mini-nav-icon ${activeSection === "intro" ? "active" : ""}`} 
-          title="Intro"
+          title="Home"
         >
           <i className="fas fa-home"></i>
         </a>
         <a 
-          href="#about" 
-          className={`mini-nav-icon ${activeSection === "about" ? "active" : ""}`} 
-          title="About"
+          href="#skills" 
+          className={`mini-nav-icon ${activeSection === "skills" ? "active" : ""}`} 
+          title="Tech Stack"
         >
-          <i className="fas fa-user"></i>
+          <i className="fas fa-code"></i>
         </a>
         <a 
           href="#projects" 
           className={`mini-nav-icon ${activeSection === "projects" ? "active" : ""}`} 
-          title="Portfolio"
+          title="Projects"
         >
           <i className="fas fa-briefcase"></i>
-        </a>
-        <a 
-          href="#skills" 
-          className={`mini-nav-icon ${activeSection === "skills" ? "active" : ""}`} 
-          title="Technologies"
-        >
-          <i className="fas fa-code"></i>
         </a>
         <a 
           href="#contact" 
