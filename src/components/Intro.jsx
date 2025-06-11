@@ -346,12 +346,13 @@ const Intro = () => {
                   </a>
                 </div>
 
-                <button
-                  className="contact-button"
+                <a
+                  href="#contact"
+                  className="contact-button smooth-scroll"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Let's Talk
-                </button>
+                </a>
               </div>
             </div>
           </div>
