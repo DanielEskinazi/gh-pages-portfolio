@@ -1,48 +1,138 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import "./Projects.css";
 
-const Projects = () => (
-  <section id="projects" className="projects">
-    <div className="projects-container">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="projects-title"
-      >
-        Featured Projects
-      </motion.h2>
+const Projects = () => {
+  const projects = [
+    {
+      id: 1,
+      number: "01",
+      title: "MTI Electronics",
+      tech: ["Next.js", "Payload CMS", "Tailwind CSS"],
+      description: "E-commerce platform for electronics retailer with custom CMS integration",
+      preview: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop&q=80"
+    },
+    {
+      id: 2,
+      number: "02",
+      title: "Epikeart",
+      tech: ["React", "Redux", "React i18n"],
+      description: "Multi-language e-commerce solution with advanced state management",
+      preview: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&h=800&fit=crop&q=80"
+    },
+    {
+      id: 3,
+      number: "03",
+      title: "Resume Roaster",
+      tech: ["GPT-4", "Next.js", "PostgreSQL"],
+      description: "AI-powered resume analysis and optimization platform",
+      preview: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=800&fit=crop&q=80"
+    },
+    {
+      id: 4,
+      number: "04",
+      title: "Real Estate",
+      tech: ["React.js", "Redux", "Tailwind CSS"],
+      description: "Modern real estate platform with advanced search and filtering",
+      preview: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=800&fit=crop&q=80"
+    },
+    {
+      id: 5,
+      number: "05",
+      title: "Consulting Finance",
+      tech: ["HTML", "CSS & SCSS", "Javascript"],
+      description: "Corporate finance consulting website with interactive features",
+      preview: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=800&fit=crop&q=80"
+    },
+    {
+      id: 6,
+      number: "06",
+      title: "devLinks",
+      tech: ["Next.js", "Formik", "Drag & Drop"],
+      description: "Developer link sharing platform with customizable profiles",
+      preview: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=800&fit=crop&q=80"
+    }
+  ];
 
-      <div className="projects-grid">
-        <motion.div whileHover={{ scale: 1.05 }} className="project-card">
-          <h3 className="project-title">Personal Finance Dashboard</h3>
-          <p className="project-description">
-            A full-stack application built with React, Node.js and MongoDB that
-            helps users track expenses, set budgets and visualize spending
-            patterns with interactive charts.
-          </p>
-          <div className="project-tags">
-            <span className="tag tag-react">React</span>
-            <span className="tag tag-node">Node.js</span>
-            <span className="tag tag-mongo">MongoDB</span>
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [activeProject, setActiveProject] = useState(projects[0]); // Default to first project
+
+  const handleProjectClick = (project) => {
+    setActiveProject(project);
+  };
+
+  return (
+    <section id="projects" className="projects-section">
+      <div className="projects-container">
+        <div className="projects-header">
+          <span className="asterisk">*</span>
+          <h2 className="section-title">SELECTED PROJECTS</h2>
+        </div>
+        
+        <div className="projects-layout">
+          <div className="projects-list">
+            {projects.map((project) => (
+              <motion.div
+                key={project.id}
+                className={`project-item ${activeProject.id === project.id ? 'active' : ''}`}
+                onMouseEnter={() => setHoveredProject(project)}
+                onMouseLeave={() => setHoveredProject(null)}
+                onClick={() => handleProjectClick(project)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: project.id * 0.1 }}
+              >
+                <span className="project-number">{project.number}.</span>
+                <div className="project-info">
+                  <div className="project-title-wrapper">
+                    <h3 className="project-title">{project.title}</h3>
+                  </div>
+                  <div className="project-tech">
+                    {project.tech.map((tech, index) => (
+                      <span key={index} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-
-        <motion.div whileHover={{ scale: 1.05 }} className="project-card">
-          <h3 className="project-title">AI Recipe Generator</h3>
-          <p className="project-description">
-            An innovative web app that uses OpenAI's GPT-3 to generate unique
-            recipes based on available ingredients. Features include meal
-            planning, nutritional information, and shopping lists.
-          </p>
-          <div className="project-tags">
-            <span className="tag tag-next">Next.js</span>
-            <span className="tag tag-openai">OpenAI API</span>
-            <span className="tag tag-css">CSS</span>
+          
+          <div className="projects-preview">
+            {(hoveredProject || activeProject) && (
+              <motion.div
+                className="preview-container"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img 
+                  src={(hoveredProject || activeProject).preview} 
+                  alt={(hoveredProject || activeProject).title}
+                  className="preview-image"
+                />
+                <div className="preview-header">
+                  <h4>{(hoveredProject || activeProject).title}</h4>
+                  <div className="preview-tech">
+                    {(hoveredProject || activeProject).tech.map((tech, index) => (
+                      <span key={index} className="preview-tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="preview-info">
+                  <p>{(hoveredProject || activeProject).description}</p>
+                </div>
+              </motion.div>
+            )}
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Projects;
