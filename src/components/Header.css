@@ -1,22 +1,102 @@
-header {
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: #252a34; /* Ensure header background matches page background */
-  padding: 20px 0; /* Adjust padding to ensure full visibility */
-}
-
-.fixed-header {
+.mini-dock-header {
   position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  background: none;
+  color: inherit;
+  padding: 0;
+  text-align: left;
+  width: auto;
 }
 
-nav a {
-  color: white;
+.mini-dock-nav {
+  background: rgba(40, 40, 40, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+}
+
+.mini-nav-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
   text-decoration: none;
-  margin: 0 15px;
+  font-size: 11px;
+  transition: all 0.2s ease;
+  position: relative;
+  background: transparent;
 }
 
-nav a:hover {
-  text-decoration: underline;
+.mini-nav-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.mini-nav-icon.active {
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+  color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(142, 45, 226, 0.3);
+}
+
+.mini-nav-icon.active:hover {
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+}
+
+/* Tooltip effect */
+.mini-nav-icon::after {
+  content: attr(title);
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.mini-nav-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+  top: -30px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .mini-dock-header {
+    top: 20px;
+  }
+
+  .mini-dock-nav {
+    padding: 3px 4px;
+    gap: 0px;
+    border-radius: 6px;
+  }
+
+  .mini-nav-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    border-radius: 2px;
+  }
 }

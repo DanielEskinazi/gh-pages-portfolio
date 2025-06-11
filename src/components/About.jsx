@@ -3,26 +3,92 @@ import "./About.css"; // Import CSS for styling
 
 const About = () => (
   <section id="about">
-    <div className="spacer"></div> {/* Add spacer element */}
-    <h2>About Me</h2>
-    <p>
-      🇻🇪 Born and raised in Venezuela, I'm fully bilingual in English and
-      Spanish! But that's just the start of my story. Talk about an overachiever
-      - I managed to collect not one, not two, but THREE bachelor's degrees like
-      they were Pokemon cards! First, I snagged a Finance degree from UCF in
-      2013, while simultaneously (yes, you read that right!) earning a Business
-      Administration degree from ICN Business School in France (oui oui! 🇫🇷).
-      Not content with just that, I went back for the hat-trick and grabbed a
-      Computer Science degree from FIU in 2019.
-    </p>
-    <p>
-      💳 Since April 2019, I've been living the dream at American Express (never
-      leave home without it! 😉), where I've worked my way up to Senior
-      Engineer. I'm your friendly neighborhood Full Stack developer, constantly
-      leveling up my skills like a character in a tech RPG. 🎮 YES, some of this
-      is AI generated, and YES it is all true. I am an AI empowered developer,
-      and let's be honest, if you are not, then are you really developing?
-    </p>
+    <div className="spacer"></div>
+    <div className="about-container">
+      {/* Profile Card */}
+      <div className="profile-card">
+        <div className="profile-image">
+          <img src="/headshot.jpg" alt="Daniel Eskinazi" />
+        </div>
+        <h3 className="profile-name">Daniel Eskinazi</h3>
+        <p className="profile-title">Full Stack Developer</p>
+        <p className="profile-location">Miami, Florida</p>
+
+        <div className="social-links">
+          <a href="#" className="social-link">
+            <i className="fab fa-dribbble"></i>
+          </a>
+          <a href="#" className="social-link">
+            <i className="fab fa-twitter"></i>
+          </a>
+          <a href="#" className="social-link">
+            <i className="fab fa-instagram"></i>
+          </a>
+          <a href="#" className="social-link">
+            <i className="fas fa-envelope"></i>
+          </a>
+        </div>
+
+        <button className="contact-button">Let's Talk</button>
+      </div>
+
+      {/* Main Content */}
+      <div className="about-content">
+        <h1 className="about-main-title">
+          Transforming Your <br />
+          Ideas into <span className="highlight-text">Reality</span>
+        </h1>
+
+        <div className="about-description">
+          <p>
+            Passionate about creating intuitive and engaging user experiences.
+          </p>
+          <p>
+            Specialize in transforming ideas into beautifully crafted products.
+          </p>
+        </div>
+
+        {/* Statistics */}
+        <div className="stats-grid">
+          <div className="stat-item">
+            <div className="stat-number">+7</div>
+            <div className="stat-label">
+              <div>YEARS OF</div>
+              <div>EXPERIENCE</div>
+            </div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">+50</div>
+            <div className="stat-label">
+              <div>PROJECTS</div>
+              <div>COMPLETED</div>
+            </div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">+20</div>
+            <div className="stat-label">
+              <div>WORLDWIDE</div>
+              <div>CLIENTS</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="action-buttons">
+          <button className="primary-button">Let's Talk</button>
+          <button className="secondary-button">
+            My Work <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        {/* Trust Section */}
+        <div className="trust-section">
+          <p className="trust-text">
+            Relied on by companies like American Express
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 );
 

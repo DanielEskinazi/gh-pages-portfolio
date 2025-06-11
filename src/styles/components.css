@@ -87,7 +87,9 @@ nav a:hover {
 /* Contact Component */
 .contact {
   padding: 4rem 1rem;
-  background-color: #f5f5f5;
+  background: transparent;
+  position: relative;
+  z-index: 10;
 }
 
 .contact-container {
@@ -101,13 +103,13 @@ nav a:hover {
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .contact-description {
   text-align: center;
   font-size: 1.1rem;
-  color: #666;
+  color: #cccccc;
   margin-bottom: 3rem;
   line-height: 1.6;
 }
@@ -115,7 +117,9 @@ nav a:hover {
 /* Skills Component */
 .skills {
   padding: 4rem 1rem;
-  background-color: #fff;
+  background: transparent;
+  position: relative;
+  z-index: 10;
 }
 
 .skills-container {
@@ -129,7 +133,7 @@ nav a:hover {
   font-weight: bold;
   text-align: center;
   margin-bottom: 3rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .skills-grid {
@@ -139,7 +143,7 @@ nav a:hover {
 }
 
 .skill-category {
-  background: #f9f9f9;
+  background: #2a2a2a;
   padding: 1.5rem;
   border-radius: 0.75rem;
   border: 2px solid transparent;
@@ -147,15 +151,15 @@ nav a:hover {
 }
 
 .skill-category:hover {
-  border-color: #007bff;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  border-color: #4ade80;
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.15);
 }
 
 .category-title {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #333;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -167,8 +171,8 @@ nav a:hover {
 }
 
 .skill-tag {
-  background-color: #007bff;
-  color: white;
+  background-color: #4ade80;
+  color: #000000;
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
   font-size: 0.875rem;
@@ -178,14 +182,16 @@ nav a:hover {
 }
 
 .skill-tag:hover {
-  background-color: #0056b3;
+  background-color: #22c55e;
   transform: translateY(-2px);
 }
 
 /* Projects Component */
 .projects {
   padding: 4rem 1rem;
-  background-color: #f9f9f9;
+  background: transparent;
+  position: relative;
+  z-index: 10;
 }
 
 .projects-container {
@@ -199,6 +205,7 @@ nav a:hover {
   font-weight: bold;
   text-align: center;
   margin-bottom: 3rem;
+  color: #ffffff;
 }
 
 .projects-grid {
@@ -208,20 +215,21 @@ nav a:hover {
 }
 
 .project-card {
-  background: white;
+  background: #2a2a2a;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .project-title {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .project-description {
-  color: #666;
+  color: #cccccc;
   margin-bottom: 1rem;
   line-height: 1.6;
 }
@@ -239,33 +247,54 @@ nav a:hover {
 }
 
 .tag-react {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #dcfce7;
+  color: #166534;
 }
 
 .tag-node {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  background-color: #ecfdf5;
+  color: #14532d;
 }
 
 .tag-mongo {
-  background-color: #f3e5f5;
-  color: #7b1fa2;
+  background-color: #f0fdf4;
+  color: #15803d;
 }
 
 .tag-next {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #dcfce7;
+  color: #166534;
 }
 
 .tag-openai {
-  background-color: #fff3e0;
-  color: #e65100;
+  background-color: #f7fee7;
+  color: #365314;
 }
 
 .tag-css {
-  background-color: #fce4ec;
-  color: #c2185b;
+  background-color: #ecfdf5;
+  color: #14532d;
+}
+
+/* Contact Form Styling */
+.contact .ui.primary.button {
+  background-color: #4ade80 !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+.contact .ui.primary.button:hover {
+  background-color: #22c55e !important;
+}
+
+.contact .ui.form .field > label {
+  color: #333 !important;
+}
+
+.contact .ui.form input:focus,
+.contact .ui.form textarea:focus {
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2) !important;
 }
 
 /* Footer Animations */

@@ -243,12 +243,12 @@ const Intro = () => {
               options={{
                 preset: "links",
                 fullScreen: {
-                  enable: false,
-                  zIndex: -1,
+                  enable: true,
+                  zIndex: 0,
                 },
                 background: {
                   color: {
-                    value: "transparent", // Make background transparent
+                    value: "#252a34", // Match body background
                   },
                 },
                 particles: {
@@ -284,7 +284,7 @@ const Intro = () => {
                       opacity: 1,
                       speed: 3,
                       color: {
-                        value: "#4ade80",
+                        value: "#8e2de2",
                       },
                     },
                   },
@@ -312,10 +312,10 @@ const Intro = () => {
               </p>
               <a
                 href="#about"
-                className="hire-button smooth-scroll intro-button"
+                className="learn-more-button smooth-scroll intro-button"
                 onClick={(e) => e.stopPropagation()}
               >
-                HIRE ME
+                Learn More
               </a>
             </div>
           </div>
