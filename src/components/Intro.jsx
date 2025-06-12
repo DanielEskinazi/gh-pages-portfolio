@@ -195,20 +195,29 @@ const Intro = () => {
 
     // Use the global tsParticles click handler
     tsParticles.setOnClickHandler((event, particlesInstance) => {
-      // Check if the click is within the intro section
-      const introSection = document.getElementById("intro");
-      if (!introSection || !introSection.contains(event.target)) {
-        return; // Ignore clicks outside intro section
-      }
-
-      // Check if we clicked on a UI element (not particles)
+      // Check if we clicked on an actual clickable element
       const clickedElement = event.target;
+      
+      // Skip if clicking on buttons, links, inputs, or other interactive elements
       if (
+        clickedElement.tagName === 'BUTTON' ||
+        clickedElement.tagName === 'A' ||
+        clickedElement.tagName === 'INPUT' ||
+        clickedElement.tagName === 'TEXTAREA' ||
+        clickedElement.tagName === 'SELECT' ||
         clickedElement.classList.contains("button") ||
-        clickedElement.classList.contains("text") ||
-        clickedElement.closest(".content-blocker")
+        clickedElement.classList.contains("learn-more-button") ||
+        clickedElement.classList.contains("contact-button") ||
+        clickedElement.classList.contains("social-link") ||
+        clickedElement.closest("button") ||
+        clickedElement.closest("a") ||
+        clickedElement.closest("input") ||
+        clickedElement.closest("textarea") ||
+        clickedElement.closest("select") ||
+        clickedElement.closest(".ui.button") ||
+        clickedElement.closest("form")
       ) {
-        return; // Don't handle clicks on UI elements
+        return; // Don't handle clicks on actual interactive elements
       }
 
       console.log(
@@ -332,16 +341,13 @@ const Intro = () => {
                 <p className="profile-location">Plantation, Florida</p>
 
                 <div className="social-links">
-                  <a href="#" className="social-link">
-                    <i className="fab fa-dribbble"></i>
+                  <a href="https://linkedin.com/in/danieleskinazi" className="social-link" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-linkedin"></i>
                   </a>
-                  <a href="#" className="social-link">
-                    <i className="fab fa-twitter"></i>
+                  <a href="https://github.com/DanielEskinazi" className="social-link" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-github"></i>
                   </a>
-                  <a href="#" className="social-link">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a href="#" className="social-link">
+                  <a href="mailto:daniel@danieleskinazi.com" className="social-link">
                     <i className="fas fa-envelope"></i>
                   </a>
                 </div>

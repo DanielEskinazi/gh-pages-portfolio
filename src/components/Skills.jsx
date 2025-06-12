@@ -1,260 +1,460 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Skills.css";
+import {
+  SiGo,
+  SiNodedotjs,
+  SiPython,
+  SiPostgresql,
+  SiSupabase,
+  SiRedis,
+  SiMongodb,
+  SiCouchbase,
+  SiPrometheus,
+  SiElasticsearch,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+  SiHtml5,
+  SiCss3,
+  SiAmazonwebservices,
+  SiGooglecloud,
+  SiDocker,
+  SiKubernetes,
+  SiAnsible,
+  SiJenkins,
+  SiGitlab,
+  SiGithubactions,
+  SiJest,
+  SiPytest,
+  SiSplunk,
+  SiGrafana,
+  SiKibana,
+  SiJaeger,
+  SiFigma,
+  SiPostman,
+  SiJira,
+  SiConfluence,
+  SiSlack,
+  SiGit,
+  SiApachekafka,
+  SiMysql,
+  SiMake,
+} from "react-icons/si";
+
+// Brand colors for each technology
+const techColors = {
+  Go: "#00ADD8",
+  "Node.js": "#339933",
+  Python: "#3776AB",
+  PostgreSQL: "#4169E1",
+  Supabase: "#3ECF8E",
+  Redis: "#DC382D",
+  MongoDB: "#47A248",
+  Couchbase: "#EA2328",
+  Prometheus: "#E6522C",
+  Elasticsearch: "#005571",
+  Kafka: "#231F20",
+  MySQL: "#4479A1",
+  React: "#61DAFB",
+  "Next.js": "#000000",
+  Tailwind: "#06B6D4",
+  TypeScript: "#3178C6",
+  HTML: "#E34C26",
+  CSS: "#1572B6",
+  AWS: "#FF9900",
+  GCP: "#4285F4",
+  Docker: "#2496ED",
+  Kubernetes: "#326CE5",
+  Ansible: "#EE0000",
+  Jenkins: "#D24939",
+  "GitLab CI/CD": "#FC6D26",
+  "GitHub Actions": "#2088FF",
+  Make: "#000000",
+  Jest: "#C21325",
+  Pytest: "#0A9EDC",
+  "Go test": "#00ADD8",
+  Splunk: "#000000",
+  Grafana: "#F46800",
+  Kibana: "#005571",
+  Jaeger: "#60D0E4",
+  N8N: "#EA4B71",
+  Figma: "#F24E1E",
+  Postman: "#FF6C37",
+  Jira: "#0052CC",
+  Confluence: "#172B4D",
+  Slack: "#4A154B",
+  Zoom: "#2D8CFF",
+  Git: "#F05032",
+};
 
 const techStack = [
-  // Frontend
+  // Backend
   {
     id: 1,
-    name: "React",
-    category: "Frontend",
-    proficiency: "Expert",
-    years: 5,
-    tags: ["hooks", "context", "jsx", "components"],
-    icon: "⚛️",
+    name: "Go",
+    category: "Backend",
+    years: 6,
+    tags: ["microservices", "concurrency", "performance", "cli"],
+    icon: SiGo,
     core: true,
   },
   {
     id: 2,
-    name: "TypeScript",
-    category: "Frontend",
-    proficiency: "Expert",
-    years: 4,
-    tags: ["types", "interfaces", "generics", "strict"],
-    icon: "🔷",
+    name: "Node.js",
+    category: "Backend",
+    years: 6,
+    tags: ["express", "api", "middleware", "async"],
+    icon: SiNodedotjs,
     core: true,
   },
   {
     id: 3,
-    name: "Next.js",
-    category: "Frontend",
-    proficiency: "Expert",
-    years: 3,
-    tags: ["ssr", "api-routes", "routing", "optimization"],
-    icon: "▲",
+    name: "Python",
+    category: "Backend",
+    years: 7,
+    tags: ["fastapi", "django", "automation", "scripting"],
+    icon: SiPython,
+    core: true,
+  },
+  // Databases
+  {
+    id: 4,
+    name: "PostgreSQL",
+    category: "Databases",
+    years: 6,
+    tags: ["sql", "indexing", "relations", "optimization"],
+    icon: SiPostgresql,
     core: true,
   },
   {
-    id: 4,
-    name: "Tailwind CSS",
-    category: "Frontend",
-    proficiency: "Expert",
-    years: 3,
-    tags: ["utility", "responsive", "customization", "theming"],
-    icon: "💨",
-  },
-  {
     id: 5,
-    name: "Framer Motion",
-    category: "Frontend",
-    proficiency: "Intermediate",
+    name: "Supabase",
+    category: "Databases",
     years: 2,
-    tags: ["animations", "gestures", "transitions", "spring"],
-    icon: "🎭",
+    tags: ["real-time", "auth", "edge-functions", "storage"],
+    icon: SiSupabase,
+    core: true,
   },
-  // Backend
   {
     id: 6,
-    name: "Node.js",
-    category: "Backend",
-    proficiency: "Expert",
-    years: 6,
-    tags: ["express", "api", "middleware", "async"],
-    icon: "💚",
+    name: "Redis",
+    category: "Databases",
+    years: 5,
+    tags: ["caching", "sessions", "pub-sub", "performance"],
+    icon: SiRedis,
     core: true,
   },
   {
     id: 7,
-    name: "Python",
-    category: "Backend",
-    proficiency: "Expert",
-    years: 7,
-    tags: ["fastapi", "django", "automation", "scripting"],
-    icon: "🐍",
-    core: true,
+    name: "MongoDB",
+    category: "Databases",
+    years: 5,
+    tags: ["nosql", "documents", "aggregation", "scaling"],
+    icon: SiMongodb,
   },
   {
     id: 8,
-    name: "Go",
-    category: "Backend",
-    proficiency: "Intermediate",
-    years: 2,
-    tags: ["microservices", "concurrency", "performance", "cli"],
-    icon: "🔷",
+    name: "Couchbase",
+    category: "Databases",
+    years: 6,
+    tags: ["nosql", "documents", "n1ql", "clustering"],
+    icon: SiCouchbase,
   },
   {
     id: 9,
-    name: "GraphQL",
-    category: "Backend",
-    proficiency: "Intermediate",
-    years: 3,
-    tags: ["queries", "mutations", "schema", "resolvers"],
-    icon: "🔍",
+    name: "Prometheus",
+    category: "Databases",
+    years: 2,
+    tags: ["metrics", "time-series", "monitoring", "scraping"],
+    icon: SiPrometheus,
   },
-  // Databases
   {
     id: 10,
-    name: "PostgreSQL",
+    name: "Elasticsearch",
     category: "Databases",
-    proficiency: "Expert",
-    years: 6,
-    tags: ["sql", "indexing", "relations", "optimization"],
-    icon: "🐘",
-    core: true,
+    years: 5,
+    tags: ["search", "analytics", "logging", "indexing"],
+    icon: SiElasticsearch,
   },
   {
     id: 11,
-    name: "Redis",
+    name: "Kafka",
     category: "Databases",
-    proficiency: "Intermediate",
-    years: 4,
-    tags: ["caching", "sessions", "pub-sub", "performance"],
-    icon: "🔴",
+    years: 6,
+    tags: ["streaming", "pub-sub", "distributed", "real-time"],
+    icon: SiApachekafka,
   },
   {
     id: 12,
-    name: "Supabase",
+    name: "MySQL",
     category: "Databases",
-    proficiency: "Expert",
-    years: 2,
-    tags: ["real-time", "auth", "edge-functions", "storage"],
-    icon: "⚡",
+    years: 7,
+    tags: ["sql", "relational", "transactions", "replication"],
+    icon: SiMysql,
+  },
+  // Frontend
+  {
+    id: 11,
+    name: "React",
+    category: "Frontend",
+    years: 7,
+    tags: ["hooks", "context", "jsx", "components"],
+    icon: SiReact,
+    core: true,
+  },
+  {
+    id: 12,
+    name: "Next.js",
+    category: "Frontend",
+    years: 6,
+    tags: ["ssr", "api-routes", "routing", "optimization"],
+    icon: SiNextdotjs,
+    core: true,
   },
   {
     id: 13,
-    name: "Couchbase",
-    category: "Databases",
-    proficiency: "Intermediate",
+    name: "Tailwind",
+    category: "Frontend",
     years: 3,
-    tags: ["nosql", "documents", "n1ql", "clustering"],
-    icon: "🛋️",
+    tags: ["utility-first", "responsive", "customization", "rapid"],
+    icon: SiTailwindcss,
   },
-  // DevOps
   {
     id: 14,
-    name: "Docker",
-    category: "DevOps",
-    proficiency: "Expert",
-    years: 5,
-    tags: ["containers", "compose", "images", "deployment"],
-    icon: "🐳",
+    name: "TypeScript",
+    category: "Frontend",
+    years: 3,
+    tags: ["types", "interfaces", "generics", "strict"],
+    icon: SiTypescript,
     core: true,
   },
   {
     id: 15,
-    name: "Kubernetes",
-    category: "DevOps",
-    proficiency: "Intermediate",
-    years: 2,
-    tags: ["orchestration", "pods", "services", "scaling"],
-    icon: "☸️",
+    name: "HTML",
+    category: "Frontend",
+    years: 7,
+    tags: ["semantic", "accessibility", "forms", "multimedia"],
+    icon: SiHtml5,
+    core: true,
   },
   {
     id: 16,
-    name: "GitHub Actions",
-    category: "DevOps",
-    proficiency: "Expert",
-    years: 4,
-    tags: ["ci-cd", "workflows", "automation", "testing"],
-    icon: "🔄",
+    name: "CSS",
+    category: "Frontend",
+    years: 7,
+    tags: ["responsive", "grid", "flexbox", "animations"],
+    icon: SiCss3,
+    core: true,
   },
-  // Cloud Services
+  // Cloud
+  {
+    id: 16,
+    name: "AWS",
+    category: "Cloud",
+    years: 1,
+    tags: ["ec2", "s3", "lambda", "cloudformation"],
+    icon: SiAmazonwebservices,
+  },
   {
     id: 17,
-    name: "AWS",
-    category: "Cloud Services",
-    proficiency: "Intermediate",
-    years: 4,
-    tags: ["ec2", "s3", "lambda", "cloudformation"],
-    icon: "☁️",
-  },
-  {
-    id: 18,
-    name: "Vercel",
-    category: "Cloud Services",
-    proficiency: "Expert",
-    years: 3,
-    tags: ["deployment", "edge", "serverless", "optimization"],
-    icon: "▲",
-  },
-  // AI/ML
-  {
-    id: 19,
-    name: "OpenAI API",
-    category: "AI/ML",
-    proficiency: "Intermediate",
-    years: 2,
-    tags: ["gpt", "embeddings", "completions", "fine-tuning"],
-    icon: "🤖",
-  },
-  {
-    id: 20,
-    name: "LangChain",
-    category: "AI/ML",
-    proficiency: "Beginner",
+    name: "GCP",
+    category: "Cloud",
     years: 1,
-    tags: ["chains", "agents", "memory", "tools"],
-    icon: "🔗",
+    tags: ["compute", "storage", "bigquery", "kubernetes"],
+    icon: SiGooglecloud,
   },
-  // Testing
+  // DevOps
   {
     id: 21,
-    name: "Jest",
-    category: "Testing",
-    proficiency: "Expert",
-    years: 5,
-    tags: ["unit", "mocking", "coverage", "tdd"],
-    icon: "🃏",
+    name: "Docker",
+    category: "DevOps",
+    years: 6,
+    tags: ["containers", "compose", "images", "deployment"],
+    icon: SiDocker,
+    core: true,
   },
   {
     id: 22,
-    name: "Playwright",
-    category: "Testing",
-    proficiency: "Intermediate",
-    years: 2,
-    tags: ["e2e", "automation", "browsers", "visual"],
-    icon: "🎭",
-  },
-  // Monitoring
-  {
-    id: 23,
-    name: "Sentry",
-    category: "Monitoring",
-    proficiency: "Intermediate",
+    name: "Kubernetes",
+    category: "DevOps",
     years: 3,
-    tags: ["errors", "performance", "alerts", "debugging"],
-    icon: "🚨",
+    tags: ["orchestration", "pods", "services", "scaling"],
+    icon: SiKubernetes,
   },
-  // Tools
   {
     id: 24,
-    name: "VS Code",
-    category: "Tools",
-    proficiency: "Expert",
-    years: 7,
-    tags: ["editor", "extensions", "debugging", "productivity"],
-    icon: "💻",
+    name: "Ansible",
+    category: "DevOps",
+    years: 4,
+    tags: ["automation", "playbooks", "configuration", "idempotent"],
+    icon: SiAnsible,
   },
   {
     id: 25,
+    name: "Jenkins",
+    category: "DevOps",
+    years: 4,
+    tags: ["ci-cd", "pipelines", "automation", "plugins"],
+    icon: SiJenkins,
+  },
+  {
+    id: 26,
+    name: "GitLab CI/CD",
+    category: "DevOps",
+    years: 4,
+    tags: ["pipelines", "runners", "yaml", "automation"],
+    icon: SiGitlab,
+  },
+  {
+    id: 27,
+    name: "GitHub Actions",
+    category: "DevOps",
+    years: 5,
+    tags: ["workflows", "automation", "testing", "deployment"],
+    icon: SiGithubactions,
+  },
+  {
+    id: 28,
+    name: "Make",
+    category: "DevOps",
+    years: 5,
+    tags: ["build", "automation", "makefile", "dependencies"],
+    icon: SiMake,
+  },
+  // Testing
+  {
+    id: 28,
+    name: "Jest",
+    category: "Testing",
+    years: 7,
+    tags: ["unit", "mocking", "coverage", "javascript"],
+    icon: SiJest,
+  },
+  {
+    id: 29,
+    name: "Pytest",
+    category: "Testing",
+    years: 7,
+    tags: ["python", "fixtures", "parametrize", "plugins"],
+    icon: SiPytest,
+  },
+  {
+    id: 30,
+    name: "Go test",
+    category: "Testing",
+    years: 6,
+    tags: ["testing", "benchmarks", "table-driven", "coverage"],
+    icon: SiGo,
+  },
+  // Monitoring
+  {
+    id: 31,
+    name: "Splunk",
+    category: "Monitoring",
+    years: 4,
+    tags: ["logs", "search", "analytics", "dashboards"],
+    icon: SiSplunk,
+  },
+  {
+    id: 32,
+    name: "Prometheus",
+    category: "Monitoring",
+    years: 5,
+    tags: ["metrics", "time-series", "alerting", "scraping"],
+    icon: SiPrometheus,
+  },
+  {
+    id: 33,
+    name: "Grafana",
+    category: "Monitoring",
+    years: 5,
+    tags: ["dashboards", "visualization", "alerts", "queries"],
+    icon: SiGrafana,
+  },
+  {
+    id: 34,
+    name: "Kibana",
+    category: "Monitoring",
+    years: 4,
+    tags: ["elasticsearch", "visualization", "logs", "analytics"],
+    icon: SiKibana,
+  },
+  {
+    id: 35,
+    name: "Jaeger",
+    category: "Monitoring",
+    years: 6,
+    tags: ["tracing", "distributed", "performance", "debugging"],
+    icon: SiJaeger,
+  },
+  // Tools
+  {
+    id: 36,
+    name: "N8N",
+    category: "Tools",
+    years: 2,
+    tags: ["automation", "workflows", "integrations", "visual"],
+    icon: "🔗",
+  },
+  {
+    id: 37,
+    name: "Figma",
+    category: "Tools",
+    years: 3,
+    tags: ["design", "prototyping", "collaboration", "ui-ux"],
+    icon: SiFigma,
+  },
+  {
+    id: 38,
+    name: "Postman",
+    category: "Tools",
+    years: 7,
+    tags: ["api-testing", "collections", "environments", "automation"],
+    icon: SiPostman,
+  },
+  {
+    id: 40,
+    name: "Jira",
+    category: "Tools",
+    years: 7,
+    tags: ["project-management", "agile", "tickets", "workflows"],
+    icon: SiJira,
+  },
+  {
+    id: 41,
+    name: "Confluence",
+    category: "Tools",
+    years: 7,
+    tags: ["documentation", "wiki", "collaboration", "atlassian"],
+    icon: SiConfluence,
+  },
+  {
+    id: 42,
+    name: "Slack",
+    category: "Tools",
+    years: 7,
+    tags: ["communication", "teams", "integrations", "workflows"],
+    icon: SiSlack,
+  },
+  {
+    id: 44,
     name: "Git",
     category: "Tools",
-    proficiency: "Expert",
-    years: 7,
+    years: 8,
     tags: ["version-control", "branching", "merging", "collaboration"],
-    icon: "📝",
-    core: true,
+    icon: SiGit,
   },
 ];
 
 const categories = [
   "Core Stack",
-  "Frontend",
   "Backend",
   "Databases",
+  "Frontend",
+  "Cloud",
   "DevOps",
-  "Cloud Services",
-  "AI/ML",
   "Testing",
   "Monitoring",
   "Tools",
@@ -271,14 +471,14 @@ const Skills = () => {
         tech.tags.some((tag) =>
           tag.toLowerCase().includes(searchTerm.toLowerCase())
         );
-      
+
       let matchesCategory;
       if (selectedCategory === "Core Stack") {
         matchesCategory = tech.core === true;
       } else {
         matchesCategory = tech.category === selectedCategory;
       }
-      
+
       return matchesSearch && matchesCategory;
     });
   }, [searchTerm, selectedCategory]);
@@ -321,10 +521,10 @@ const Skills = () => {
               >
                 {category}
                 <span className="category-count">
-                  {category === "Core Stack" 
+                  {category === "Core Stack"
                     ? techStack.filter((tech) => tech.core === true).length
-                    : techStack.filter((tech) => tech.category === category).length
-                  }
+                    : techStack.filter((tech) => tech.category === category)
+                        .length}
                 </span>
               </motion.button>
             ))}
@@ -360,24 +560,31 @@ const Skills = () => {
                 <div className="card-glow"></div>
                 <div className="card-content">
                   <div className="tech-header">
-                    <span className="tech-icon">{tech.icon}</span>
+                    <span
+                      className="tech-icon"
+                      style={{
+                        color: techColors[tech.name] || "#ffffff",
+                        background: techColors[tech.name]
+                          ? `${techColors[tech.name]}15`
+                          : "rgba(255, 255, 255, 0.05)",
+                        borderColor: techColors[tech.name]
+                          ? `${techColors[tech.name]}30`
+                          : "rgba(255, 255, 255, 0.1)",
+                      }}
+                    >
+                      {typeof tech.icon === "string" ? (
+                        tech.icon
+                      ) : (
+                        <tech.icon />
+                      )}
+                    </span>
                     <div className="tech-info">
                       <h3 className="tech-name">{tech.name}</h3>
                       <span className="tech-category">{tech.category}</span>
                     </div>
-                  </div>
-
-                  <div className="proficiency-section">
-                    <div className="proficiency-info">
-                      <span
-                        className={`proficiency-badge ${tech.proficiency.toLowerCase()}`}
-                      >
-                        {tech.proficiency}
-                      </span>
-                      <span className="experience-years">
-                        {tech.years}+ years
-                      </span>
-                    </div>
+                    <span className="experience-years">
+                      {tech.years}+ years
+                    </span>
                   </div>
 
                   <div className="tech-tags">

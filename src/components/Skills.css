@@ -1,8 +1,8 @@
 /* Tech Stack Explorer Styles */
 .tech-stack-explorer {
-  min-height: 100vh;
-  max-height: 100vh;
-  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+  padding: 80px 0 40px 0;
   position: relative;
   overflow: hidden;
 }
@@ -377,6 +377,7 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
+  position: relative;
 }
 
 .tech-icon {
@@ -391,6 +392,17 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   flex-shrink: 0;
+}
+
+.tech-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: all 0.3s ease;
+}
+
+.tech-card:hover .tech-icon svg {
+  transform: scale(1.1);
 }
 
 .tech-info {
@@ -449,6 +461,9 @@
 }
 
 .experience-years {
+  position: absolute;
+  top: 0;
+  right: 0;
   font-size: 10px;
   color: #888888;
   background: rgba(255, 255, 255, 0.05);
@@ -461,8 +476,9 @@
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
   margin-top: auto;
+  align-items: flex-start;
 }
 
 .tech-tag {
@@ -474,6 +490,12 @@
   font-size: 9px;
   font-weight: 500;
   transition: all 0.3s ease;
+  list-style: none;
+}
+
+.tech-tag::before,
+.tech-tag::after {
+  display: none;
 }
 
 .tech-tag:hover {
@@ -530,7 +552,9 @@
 
 @media (max-width: 768px) {
   .tech-stack-explorer {
-    padding: 30px 0;
+    padding: 60px 0 30px 0;
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
   }
 
   .tech-container {
@@ -616,7 +640,9 @@
 
 @media (max-width: 480px) {
   .tech-stack-explorer {
-    padding: 20px 0;
+    padding: 50px 0 20px 0;
+    min-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
   }
 
   .tech-container {
@@ -663,12 +689,14 @@
     gap: 8px;
   }
 
-  .tech-info {
-    text-align: center;
+  .tech-header .experience-years {
+    position: static;
+    align-self: center;
+    margin-top: 4px;
   }
 
-  .proficiency-info {
-    justify-content: center;
+  .tech-info {
+    text-align: center;
   }
 
   .tech-card {
@@ -697,35 +725,6 @@
 }
 
 /* Animation Enhancements */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.tech-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  );
-  transition: left 0.8s ease;
-  pointer-events: none;
-}
-
-.tech-card:hover::after {
-  left: 100%;
-}
 
 /* Particle Effect Enhancement */
 .tech-stack-explorer .particles-container {
