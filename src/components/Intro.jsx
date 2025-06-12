@@ -197,24 +197,26 @@ const Intro = () => {
     tsParticles.setOnClickHandler((event, particlesInstance) => {
       // Check if we clicked on an actual clickable element
       const clickedElement = event.target;
-      
+
       // Skip if clicking on buttons, links, inputs, or other interactive elements
       if (
-        clickedElement.tagName === 'BUTTON' ||
-        clickedElement.tagName === 'A' ||
-        clickedElement.tagName === 'INPUT' ||
-        clickedElement.tagName === 'TEXTAREA' ||
-        clickedElement.tagName === 'SELECT' ||
+        clickedElement.tagName === "BUTTON" ||
+        clickedElement.tagName === "A" ||
+        clickedElement.tagName === "INPUT" ||
+        clickedElement.tagName === "TEXTAREA" ||
+        clickedElement.tagName === "SELECT" ||
         clickedElement.classList.contains("button") ||
         clickedElement.classList.contains("learn-more-button") ||
         clickedElement.classList.contains("contact-button") ||
         clickedElement.classList.contains("social-link") ||
+        clickedElement.classList.contains("content-blocker") ||
         clickedElement.closest("button") ||
         clickedElement.closest("a") ||
         clickedElement.closest("input") ||
         clickedElement.closest("textarea") ||
         clickedElement.closest("select") ||
         clickedElement.closest(".ui.button") ||
+        clickedElement.closest(".content-blocker") ||
         clickedElement.closest("form")
       ) {
         return; // Don't handle clicks on actual interactive elements
@@ -308,7 +310,7 @@ const Intro = () => {
             particlesReady ? "particles-loaded" : ""
           }`}
         >
-          <div className="content-blocker">
+          <div className="content-blocker content-blocker">
             <div className="intro-layout">
               {/* Left side - Text content */}
               <div className="intro-content">
@@ -332,22 +334,35 @@ const Intro = () => {
               </div>
 
               {/* Right side - Profile card */}
-              <div className="profile-card">
+              <div className="profile-card content-blocker">
                 <div className="profile-image">
-                  <img src="/headshot.jpg" alt="Daniel Eskinazi" />
+                  <img src="/headshot.jpeg" alt="Daniel Eskinazi" />
                 </div>
                 <h3 className="profile-name">Daniel Eskinazi</h3>
                 <p className="profile-title">Full Stack Developer</p>
                 <p className="profile-location">Plantation, Florida</p>
 
                 <div className="social-links">
-                  <a href="https://linkedin.com/in/danieleskinazi" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://linkedin.com/in/danieleskinazi"
+                    className="social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fab fa-linkedin"></i>
                   </a>
-                  <a href="https://github.com/DanielEskinazi" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://github.com/DanielEskinazi"
+                    className="social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="fab fa-github"></i>
                   </a>
-                  <a href="mailto:daniel@danieleskinazi.com" className="social-link">
+                  <a
+                    href="mailto:daniel@danieleskinazi.com"
+                    className="social-link"
+                  >
                     <i className="fas fa-envelope"></i>
                   </a>
                 </div>

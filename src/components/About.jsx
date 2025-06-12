@@ -1,14 +1,15 @@
 import React from "react";
 import "./About.css"; // Import CSS for styling
+import "./Intro.css";
 
 const About = () => (
   <section id="about">
     <div className="spacer"></div>
     <div className="about-container">
       {/* Profile Card */}
-      <div className="profile-card">
+      <div className="profile-card content-blocker">
         <div className="profile-image">
-          <img src="/headshot.jpg" alt="Daniel Eskinazi" />
+          <img src="/headshot.jpeg" alt="Daniel Eskinazi" />
         </div>
         <h3 className="profile-name">Daniel Eskinazi</h3>
         <p className="profile-title">Full Stack Developer</p>

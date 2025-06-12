@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Skills.css";
+import "./Intro.css";
 import {
   SiGo,
   SiNodedotjs,
@@ -555,7 +556,7 @@ const Skills = () => {
                   y: -5,
                   transition: { duration: 0.2 },
                 }}
-                className="tech-card"
+                className="tech-card content-blocker"
               >
                 <div className="card-glow"></div>
                 <div className="card-content">
