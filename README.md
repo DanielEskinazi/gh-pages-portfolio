@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Daniel Eskinazi Portfolio
+
+This is a personal portfolio website built with React, showcasing projects and skills with interactive particle effects.
+
+**Live Site:** [danieleskinazi.com](https://danieleskinazi.com) (CDN forwards from GitHub Pages)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
