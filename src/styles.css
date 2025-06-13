@@ -12,6 +12,7 @@ body, html {
   background: var(--color-bg-primary);
   height: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,6 +24,7 @@ body {
 
 .App {
   min-height: 100vh;
+  max-height: 100vh;
   background: var(--color-bg-primary);
   overflow-y: auto;
   scroll-behavior: smooth;

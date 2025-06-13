@@ -10,8 +10,6 @@ const Header = () => {
       const scrollPos = app ? app.scrollTop : window.scrollY;
       const viewportHeight = window.innerHeight;
       
-      console.log('SCROLL EVENT FIRED! ScrollPos:', scrollPos, 'ViewportHeight:', viewportHeight);
-      
       // Simple section detection based on scroll position
       let currentSection = "intro";
       if (scrollPos >= viewportHeight * 2.8) { // Contact starts around 2624px
@@ -22,7 +20,6 @@ const Header = () => {
         currentSection = "skills";
       }
       
-      console.log('Setting section to:', currentSection);
       setActiveSection(currentSection);
     };
 
@@ -30,11 +27,9 @@ const Header = () => {
     const app = document.querySelector('.App');
     
     if (app) {
-      console.log('Adding scroll listener to .App container');
       app.addEventListener("scroll", handleScroll);
     }
     
-    console.log('Adding scroll listener to window');
     window.addEventListener("scroll", handleScroll);
     
     handleScroll(); // Call once on mount
