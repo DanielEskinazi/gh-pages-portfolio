@@ -5,6 +5,7 @@
   padding: 80px 0 40px 0;
   position: relative;
   overflow: hidden;
+  color: #ffffff;
 }
 
 .tech-stack-explorer::before {
@@ -565,14 +566,34 @@
     margin-bottom: 20px;
   }
 
+  /* Horizontal scrollable grid for mobile */
   .tech-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 32px 16px 32px; /* Extra padding for centering */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+
+  .tech-grid::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 
   .tech-card {
-    padding: 12px;
-    height: 160px;
+    flex: 0 0 calc(100vw - 120px); /* Almost full width with peek of next card */
+    padding: 20px;
+    height: 320px; /* Much taller cards */
+    scroll-snap-align: center; /* Center alignment for focused view */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .tech-header {
@@ -580,13 +601,41 @@
   }
 
   .tech-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 36px;
   }
 
   .tech-name {
-    font-size: 16px;
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .tech-category {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Enhanced layout for taller cards */
+  .card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .tech-header {
+    margin-bottom: 16px;
+  }
+
+  .proficiency-section {
+    margin: 16px 0;
+  }
+
+  .tech-tags {
+    margin-top: auto;
+    padding-top: 16px;
   }
 
   .stats-grid {
@@ -609,11 +658,15 @@
 
   .category-filters {
     gap: 6px;
+    overflow-x: auto;
+    padding: 4px 0;
+    -webkit-overflow-scrolling: touch;
   }
 
   .category-pill {
     padding: 5px 10px;
     font-size: 11px;
+    flex-shrink: 0;
   }
 
   .header-controls {
@@ -635,6 +688,12 @@
 
   .results-info {
     margin-bottom: 16px;
+  }
+
+  /* Add scroll hint for mobile - centered view */
+  .tech-grid::after {
+    content: "";
+    flex: 0 0 32px; /* Match padding for centering */
   }
 }
 
@@ -682,11 +741,18 @@
     font-size: 18px;
   }
 
+  /* Adjust horizontal scroll for smaller screens */
+  .tech-card {
+    flex: 0 0 calc(100vw - 100px); /* Slightly smaller peek for very small screens */
+    padding: 18px;
+    height: 300px; /* Tall cards for small screens too */
+  }
+
   .tech-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 8px;
+    gap: 6px;
   }
 
   .tech-header .experience-years {
@@ -699,9 +765,15 @@
     text-align: center;
   }
 
-  .tech-card {
-    padding: 10px;
-    height: 150px;
+  .tech-name {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .tech-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 32px;
   }
 
   .search-wrapper {

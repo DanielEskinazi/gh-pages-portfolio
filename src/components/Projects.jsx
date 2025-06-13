@@ -4,6 +4,17 @@ import "./Projects.css";
 import "./Intro.css";
 
 const Projects = () => {
+  const [expandedProject, setExpandedProject] = useState(null); // For mobile accordion
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and resize
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const projects = [
     {
       id: 1,
@@ -69,7 +80,13 @@ const Projects = () => {
   const [activeProject, setActiveProject] = useState(projects[0]); // Default to first project
 
   const handleProjectClick = (project) => {
-    setActiveProject(project);
+    if (isMobile) {
+      // Mobile accordion behavior
+      setExpandedProject(expandedProject?.id === project.id ? null : project);
+    } else {
+      // Desktop behavior
+      setActiveProject(project);
+    }
   };
 
   return (
@@ -80,71 +97,125 @@ const Projects = () => {
           <h2 className="section-title">SELECTED PROJECTS</h2>
         </div>
 
-        <div className="projects-layout">
-          <div className="projects-list content-blocker">
+        {isMobile ? (
+          // Mobile accordion layout
+          <div className="projects-mobile-layout">
             {projects.map((project) => (
               <motion.div
                 key={project.id}
-                className={`project-item ${
-                  activeProject.id === project.id ? "active" : ""
+                className={`mobile-project-item ${
+                  expandedProject?.id === project.id ? "expanded" : ""
                 }`}
-                onMouseEnter={() => setHoveredProject(project)}
-                onMouseLeave={() => setHoveredProject(null)}
-                onClick={() => handleProjectClick(project)}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: project.id * 0.1 }}
               >
-                <span className="project-number">{project.number}.</span>
-                <div className="project-info">
-                  <div className="project-title-wrapper">
+                <div 
+                  className="mobile-project-header"
+                  onClick={() => handleProjectClick(project)}
+                >
+                  <span className="project-number">{project.number}.</span>
+                  <div className="project-info">
                     <h3 className="project-title">{project.title}</h3>
-                  </div>
-                  <div className="project-tech">
-                    {project.tech.map((tech, index) => (
-                      <span key={index} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
+                    <div className="project-tech">
+                      {project.tech.map((tech, index) => (
+                        <span key={index} className="tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                
+                {expandedProject?.id === project.id && (
+                  <motion.div
+                    className="mobile-project-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      src={project.preview}
+                      alt={project.title}
+                      className="mobile-project-image"
+                    />
+                    <div className="mobile-project-description">
+                      <p>{project.description}</p>
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             ))}
           </div>
-
-          <div className="projects-preview content-blocker">
-            {(hoveredProject || activeProject) && (
-              <motion.div
-                className="preview-container"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img
-                  src={(hoveredProject || activeProject).preview}
-                  alt={(hoveredProject || activeProject).title}
-                  className="preview-image"
-                />
-                <div className="preview-header">
-                  <h4>{(hoveredProject || activeProject).title}</h4>
-                  <div className="preview-tech">
-                    {(hoveredProject || activeProject).tech.map(
-                      (tech, index) => (
-                        <span key={index} className="preview-tech-tag">
+        ) : (
+          // Desktop layout (existing)
+          <div className="projects-layout">
+            <div className="projects-list content-blocker">
+              {projects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  className={`project-item ${
+                    activeProject.id === project.id ? "active" : ""
+                  }`}
+                  onMouseEnter={() => setHoveredProject(project)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                  onClick={() => handleProjectClick(project)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: project.id * 0.1 }}
+                >
+                  <span className="project-number">{project.number}.</span>
+                  <div className="project-info">
+                    <div className="project-title-wrapper">
+                      <h3 className="project-title">{project.title}</h3>
+                    </div>
+                    <div className="project-tech">
+                      {project.tech.map((tech, index) => (
+                        <span key={index} className="tech-tag">
                           {tech}
                         </span>
-                      )
-                    )}
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className="preview-info">
-                  <p>{(hoveredProject || activeProject).description}</p>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="projects-preview content-blocker">
+              {(hoveredProject || activeProject) && (
+                <motion.div
+                  className="preview-container"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img
+                    src={(hoveredProject || activeProject).preview}
+                    alt={(hoveredProject || activeProject).title}
+                    className="preview-image"
+                  />
+                  <div className="preview-header">
+                    <h4>{(hoveredProject || activeProject).title}</h4>
+                    <div className="preview-tech">
+                      {(hoveredProject || activeProject).tech.map(
+                        (tech, index) => (
+                          <span key={index} className="preview-tech-tag">
+                            {tech}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
+                  <div className="preview-info">
+                    <p>{(hoveredProject || activeProject).description}</p>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -1,12 +1,14 @@
 /* styles.css */
 body, html {
-  font-family: Arial, sans-serif;
+  font-family: "Raleway", Arial, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background: #252a34;
   height: 100%;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -15,9 +17,17 @@ body {
 
 .App {
   min-height: 100vh;
-  max-height: 100vh;
+  background: #252a34;
   overflow-y: auto;
   scroll-behavior: smooth;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 header {

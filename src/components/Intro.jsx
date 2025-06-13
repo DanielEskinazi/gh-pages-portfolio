@@ -20,6 +20,15 @@ const Intro = () => {
     );
   };
 
+  // Detect if user is on a low-powered device
+  const isLowPerformanceDevice = () => {
+    return (
+      window.navigator.hardwareConcurrency <= 2 ||
+      window.innerWidth <= 480 ||
+      /Android.*Version\/4/i.test(navigator.userAgent)
+    );
+  };
+
   useEffect(() => {
     const fetchRealCommits = async () => {
       try {
@@ -130,8 +139,10 @@ const Intro = () => {
           const shuffledCommits = last50Commits.sort(() => Math.random() - 0.5);
           setCommits(shuffledCommits);
 
-          // Set particles to exactly 50 (or fewer on mobile for performance)
-          const targetCount = isMobile()
+          // Set particles based on device capabilities
+          const targetCount = isLowPerformanceDevice()
+            ? Math.min(last50Commits.length, 15)
+            : isMobile()
             ? Math.min(last50Commits.length, 25)
             : last50Commits.length;
           setCommitCount(targetCount);
@@ -168,7 +179,7 @@ const Intro = () => {
           },
         ];
 
-        const fallbackCount = isMobile() ? 15 : 30;
+        const fallbackCount = isLowPerformanceDevice() ? 10 : isMobile() ? 15 : 30;
         const expandedCommits = [];
         for (let i = 0; i < fallbackCount; i++) {
           expandedCommits.push(fallbackCommits[i % fallbackCommits.length]);
@@ -267,13 +278,16 @@ const Intro = () => {
                     value: commitCount, // Dynamic count based on total commits across all repos
                   },
                   size: {
-                    value: 3,
+                    value: isMobile() ? 2 : 3,
+                  },
+                  move: {
+                    speed: isMobile() ? 1 : 2,
                   },
                 },
                 interactivity: {
                   events: {
                     onHover: {
-                      enable: true,
+                      enable: !isMobile(), // Disable hover effects on mobile for performance
                       mode: ["grab", "bubble"],
                     },
                     onClick: {
@@ -283,17 +297,17 @@ const Intro = () => {
                   },
                   modes: {
                     grab: {
-                      distance: 140,
+                      distance: isMobile() ? 100 : 140,
                       links: {
                         opacity: 1,
                       },
                     },
                     bubble: {
-                      distance: 20,
-                      size: 8,
+                      distance: isMobile() ? 15 : 20,
+                      size: isMobile() ? 6 : 8,
                       duration: 0.3,
                       opacity: 1,
-                      speed: 3,
+                      speed: isMobile() ? 2 : 3,
                       color: {
                         value: "#8e2de2",
                       },

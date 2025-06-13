@@ -422,11 +422,41 @@ footer {
     max-width: 400px;
     margin: 0 auto;
   }
+
+  .intro-title {
+    font-size: 60px;
+  }
+
+  .intro-description {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 768px) {
+  .full-page {
+    padding: 2rem 1rem;
+  }
+
   .intro-layout {
     gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .intro-title {
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .intro-description {
+    font-size: 15px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .learn-more-button {
+    padding: 12px 24px;
+    font-size: 14px;
   }
 
   .profile-card {
@@ -447,25 +477,109 @@ footer {
     width: 40px;
     height: 40px;
   }
+
+  /* Reduce particle count on mobile for better performance */
+  #tsparticles canvas {
+    opacity: 0.7;
+  }
 }
 
 @media (max-width: 480px) {
+  .full-page {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .intro-layout {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .intro-title {
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  .intro-description {
+    font-size: 14px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+  }
+
+  .learn-more-button {
+    padding: 10px 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
   .profile-card {
     padding: 1rem;
     max-width: 300px;
+    border-radius: 16px;
   }
 
   .profile-image {
     width: 120px;
     height: 120px;
+    border-radius: 16px;
   }
 
   .profile-name {
     font-size: 1.3rem;
   }
 
+  .profile-title {
+    font-size: 1rem;
+  }
+
+  .profile-location {
+    font-size: 0.9rem;
+  }
+
   .contact-button {
     padding: 12px 30px;
     font-size: 14px;
+  }
+
+  .social-link {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  /* Further reduce particle opacity on small screens */
+  #tsparticles canvas {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 375px) {
+  .intro-title {
+    font-size: 32px;
+  }
+
+  .intro-description {
+    font-size: 13px;
+  }
+
+  .profile-card {
+    padding: 0.75rem;
+    max-width: 280px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 1.2rem;
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
   }
 }

@@ -484,6 +484,17 @@ const Skills = () => {
     });
   }, [searchTerm, selectedCategory]);
 
+  // Reset scroll position when filters change (mobile only)
+  React.useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      const techGrid = document.querySelector('.tech-grid');
+      if (techGrid) {
+        techGrid.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+    }
+  }, [selectedCategory, searchTerm]);
+
   return (
     <section id="skills" className="tech-stack-explorer">
       <div className="tech-container">

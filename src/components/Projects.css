@@ -237,6 +237,62 @@
   z-index: 50;
 }
 
+/* Mobile Accordion Layout */
+.projects-mobile-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-project-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-project-item.expanded {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(142, 45, 226, 0.3);
+}
+
+.mobile-project-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-project-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-project-content {
+  overflow: hidden;
+}
+
+.mobile-project-image {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  display: block;
+}
+
+.mobile-project-description {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mobile-project-description p {
+  color: #cccccc;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .projects-layout {
@@ -258,27 +314,114 @@
 @media (max-width: 768px) {
   .projects-section {
     padding: 60px 0 30px 0;
-    min-height: calc(100vh - 60px);
-    max-height: calc(100vh - 60px);
+    min-height: auto;
+    max-height: none;
   }
 
   .projects-container {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 
-  .project-title {
-    font-size: 28px;
+  /* Mobile accordion specific styles */
+  .mobile-project-header {
+    padding: 16px;
+    gap: 16px;
   }
 
-  .tech-tag {
+  .mobile-project-item .project-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .mobile-project-item .project-number {
     font-size: 12px;
+    min-width: 25px;
   }
 
-  .projects-preview {
-    height: 300px;
+  .mobile-project-item .tech-tag {
+    font-size: 11px;
+    padding: 3px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+
+  .mobile-project-image {
+    height: 50vh;
+  }
+
+  .mobile-project-description {
+    padding: 16px;
+  }
+
+  .mobile-project-description p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Hide desktop layout on mobile */
+  .projects-layout {
+    display: none;
   }
 
   .projects-header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-section {
+    padding: 50px 0 20px 0;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .projects-container {
+    padding: 0 12px;
+  }
+
+  /* Mobile accordion for smaller screens */
+  .mobile-project-header {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .mobile-project-item .project-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .mobile-project-item .project-number {
+    font-size: 11px;
+    min-width: 20px;
+  }
+
+  .mobile-project-item .tech-tag {
+    font-size: 10px;
+    padding: 2px 5px;
+  }
+
+  .mobile-project-image {
+    height: 45vh;
+  }
+
+  .mobile-project-description {
+    padding: 12px;
+  }
+
+  .mobile-project-description p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .projects-header {
+    margin-bottom: 15px;
+  }
+
+  .section-title {
+    font-size: 14px;
+  }
+
+  .asterisk {
+    font-size: 20px;
   }
 }
