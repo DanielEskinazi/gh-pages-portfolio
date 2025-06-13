@@ -204,48 +204,51 @@ const Intro = () => {
     console.log("Particles loaded, setting up click handler");
     setParticlesReady(true); // Mark particles as ready
 
-    // Use the global tsParticles click handler
-    tsParticles.setOnClickHandler((event, particlesInstance) => {
-      // Check if we clicked on an actual clickable element
-      const clickedElement = event.target;
+    // Only set up click handler for desktop - disable on mobile
+    if (!isMobile()) {
+      // Use the global tsParticles click handler
+      tsParticles.setOnClickHandler((event, particlesInstance) => {
+        // Check if we clicked on an actual clickable element
+        const clickedElement = event.target;
 
-      // Skip if clicking on buttons, links, inputs, or other interactive elements
-      if (
-        clickedElement.tagName === "BUTTON" ||
-        clickedElement.tagName === "A" ||
-        clickedElement.tagName === "INPUT" ||
-        clickedElement.tagName === "TEXTAREA" ||
-        clickedElement.tagName === "SELECT" ||
-        clickedElement.classList.contains("button") ||
-        clickedElement.classList.contains("learn-more-button") ||
-        clickedElement.classList.contains("contact-button") ||
-        clickedElement.classList.contains("social-link") ||
-        clickedElement.classList.contains("content-blocker") ||
-        clickedElement.closest("button") ||
-        clickedElement.closest("a") ||
-        clickedElement.closest("input") ||
-        clickedElement.closest("textarea") ||
-        clickedElement.closest("select") ||
-        clickedElement.closest(".ui.button") ||
-        clickedElement.closest(".content-blocker") ||
-        clickedElement.closest("form")
-      ) {
-        return; // Don't handle clicks on actual interactive elements
-      }
+        // Skip if clicking on buttons, links, inputs, or other interactive elements
+        if (
+          clickedElement.tagName === "BUTTON" ||
+          clickedElement.tagName === "A" ||
+          clickedElement.tagName === "INPUT" ||
+          clickedElement.tagName === "TEXTAREA" ||
+          clickedElement.tagName === "SELECT" ||
+          clickedElement.classList.contains("button") ||
+          clickedElement.classList.contains("learn-more-button") ||
+          clickedElement.classList.contains("contact-button") ||
+          clickedElement.classList.contains("social-link") ||
+          clickedElement.classList.contains("content-blocker") ||
+          clickedElement.closest("button") ||
+          clickedElement.closest("a") ||
+          clickedElement.closest("input") ||
+          clickedElement.closest("textarea") ||
+          clickedElement.closest("select") ||
+          clickedElement.closest(".ui.button") ||
+          clickedElement.closest(".content-blocker") ||
+          clickedElement.closest("form")
+        ) {
+          return; // Don't handle clicks on actual interactive elements
+        }
 
-      console.log(
-        "tsParticles click handler triggered!",
-        event,
-        particlesInstance
-      );
+        console.log(
+          "tsParticles click handler triggered!",
+          event,
+          particlesInstance
+        );
 
-      if (commits.length > 0) {
-        const randomCommit =
-          commits[Math.floor(Math.random() * commits.length)];
-        console.log("Opening random commit:", randomCommit);
-        window.open(randomCommit.url, "_blank");
-      }
-    });
+        if (commits.length > 0) {
+          const randomCommit =
+            commits[Math.floor(Math.random() * commits.length)];
+          console.log("Opening random commit:", randomCommit);
+          window.open(randomCommit.url, "_blank");
+        }
+      });
+    }
   };
 
   return (

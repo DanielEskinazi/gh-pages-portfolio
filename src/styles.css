@@ -1,10 +1,15 @@
-/* styles.css */
+/* Import Design System */
+@import './styles/variables.css';
+@import './styles/utilities.css';
+@import './styles/components.css';
+
+/* Global Base Styles */
 body, html {
-  font-family: "Raleway", Arial, sans-serif;
+  font-family: var(--font-family-primary);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #252a34;
+  background: var(--color-bg-primary);
   height: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -12,54 +17,56 @@ body, html {
 }
 
 body {
-  background: #252a34;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 
 .App {
   min-height: 100vh;
-  background: #252a34;
+  background: var(--color-bg-primary);
   overflow-y: auto;
   scroll-behavior: smooth;
 }
 
-/* Improve touch targets on mobile */
+/* Global Responsive Touch Targets */
 @media (max-width: 768px) {
   button, a, input, select, textarea {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
   }
 }
 
+/* Legacy Styles (using variables) */
 header {
-  background: #333;
-  color: #fff;
-  padding: 1rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
   text-align: center;
 }
 
 nav a {
-  color: #fff;
-  margin: 0 1rem;
+  color: var(--color-text-primary);
+  margin: 0 var(--spacing-4);
   text-decoration: none;
 }
 
 section {
-  padding: 2rem;
+  padding: var(--spacing-8);
 }
 
 footer {
-  background: #333;
-  color: #fff;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
   text-align: center;
-  padding: 1rem;
+  padding: var(--spacing-4);
   width: 100%;
   position: relative;
-  margin-top: 2rem;
+  margin-top: var(--spacing-8);
 }
 
 .main-content {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--container-lg);
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--spacing-5);
 }

@@ -562,7 +562,7 @@
     padding: 0 16px;
   }
 
-  .tech-header {
+  .tech-stack-explorer .tech-header {
     margin-bottom: 20px;
   }
 
@@ -583,59 +583,86 @@
     display: none; /* Safari and Chrome */
   }
 
-  .tech-card {
+  .tech-stack-explorer .tech-card {
     flex: 0 0 calc(100vw - 120px); /* Almost full width with peek of next card */
     padding: 20px;
-    height: 320px; /* Much taller cards */
+    height: 360px; /* Slightly taller to prevent tag cutoff */
     scroll-snap-align: center; /* Center alignment for focused view */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
   }
 
-  .tech-header {
-    gap: 8px;
+  .tech-stack-explorer .tech-card .tech-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0;
   }
 
-  .tech-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 36px;
+  .tech-stack-explorer .tech-card .tech-icon {
+    width: 140px !important;
+    height: 140px !important;
+    font-size: 90px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    margin-bottom: 12px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+  }
+  
+  .tech-stack-explorer .tech-card .tech-icon svg {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
   }
 
-  .tech-name {
-    font-size: 24px;
-    margin-bottom: 8px;
+  .tech-stack-explorer .tech-card .tech-name {
+    font-size: 20px;
+    margin-bottom: 4px;
     font-weight: 700;
   }
 
-  .tech-category {
-    font-size: 12px;
-    margin-bottom: 16px;
+  .tech-stack-explorer .tech-card .tech-category {
+    font-size: 11px;
+    margin-bottom: 0;
+  }
+  
+  .tech-stack-explorer .tech-card .tech-info {
+    text-align: center;
   }
 
   /* Enhanced layout for taller cards */
-  .card-content {
+  .tech-stack-explorer .tech-card .card-content {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
-  .tech-header {
-    margin-bottom: 16px;
+  .tech-stack-explorer .tech-card .proficiency-section {
+    display: none; /* Hide proficiency on mobile for cleaner look */
   }
 
-  .proficiency-section {
-    margin: 16px 0;
-  }
-
-  .tech-tags {
+  .tech-stack-explorer .tech-card .tech-tags {
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: 12px;
+    justify-content: center;
+    width: 100%;
   }
 
   .stats-grid {
@@ -742,17 +769,17 @@
   }
 
   /* Adjust horizontal scroll for smaller screens */
-  .tech-card {
-    flex: 0 0 calc(100vw - 100px); /* Slightly smaller peek for very small screens */
-    padding: 18px;
-    height: 300px; /* Tall cards for small screens too */
+  .tech-stack-explorer .tech-card {
+    flex: 0 0 calc(100vw - 80px); /* Slightly smaller peek for very small screens */
+    padding: 16px;
+    height: 320px; /* Slightly taller to prevent tag cutoff */
   }
 
   .tech-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 6px;
+    gap: 8px;
   }
 
   .tech-header .experience-years {
@@ -766,14 +793,27 @@
   }
 
   .tech-name {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
   }
 
-  .tech-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 32px;
+  .tech-stack-explorer .tech-card .tech-icon {
+    width: 120px !important;
+    height: 120px !important;
+    font-size: 80px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+  }
+  
+  .tech-stack-explorer .tech-card .tech-icon svg {
+    width: 70px !important;
+    height: 70px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
   }
 
   .search-wrapper {
