@@ -29,7 +29,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .centered-content {
@@ -240,13 +240,13 @@ footer {
   top: 0;
   left: 0;
   overflow: hidden;
-  pointer-events: auto;
+  pointer-events: none;
   z-index: 0;
 }
 
 /* Only allow particle clicks within the intro section */
 #intro .particles-container {
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 /* Force particles canvas to be fixed positioned for full page background */
@@ -257,6 +257,12 @@ footer {
   top: 0 !important;
   left: 0 !important;
   z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Disable all pointer events on canvas to prevent scroll blocking */
+#tsparticles canvas {
+  pointer-events: none !important;
 }
 
 /* Optional: Add a subtle glow effect when particles are loaded */
@@ -481,6 +487,7 @@ footer {
   /* Reduce particle count on mobile for better performance */
   #tsparticles canvas {
     opacity: 0.7;
+    pointer-events: none !important;
   }
 }
 

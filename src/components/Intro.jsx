@@ -264,7 +264,7 @@ const Intro = () => {
               id="tsparticles"
               init={particlesInit}
               loaded={particlesLoaded}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "default" }}
               options={{
                 preset: "links",
                 fullScreen: {
